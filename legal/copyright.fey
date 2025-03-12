@@ -1,0 +1,116 @@
+
+
+
+
+
+    [Setup][
+
+    [Format] Fey Copyright Format 0.1
+    This format is based on the Debian copyright format, version 1.0.
+    https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+
+    The key difference is the use of the Fey laguage syntax.
+
+    [Comment][
+    Exhaustive licensing information for files in the Fey repository
+
+    I. Purpose
+
+    This file aims at documenting the copyright and license for every source
+    file in the Fey repository, and especially outline the files
+    whose license differs from the MIT/Expat license used by Fey.
+
+
+    II. Format
+
+    It is written as a machine-readable format loosely following the debian/copyright
+    specification, with variations in syntax base don the Fey language.
+
+
+    II.i. Patterns
+
+    Globbing patterns (e.g. "Files: *") mean that they affect all corresponding files
+    (also recursively in subfolders), apart from those with a more explicit copyright statement.
+
+
+    III. Licensing
+
+    Licenses are given with their debian/copyright short name
+    (or SPDX identifier if no standard short name exists)
+    and are all included in plain text at the end of this file (in alphabetical order).
+
+
+    IV. Disclaimer
+
+    IV.i. Thirdparty libraries
+
+    Licensing details for thirdparty libraries in the 'external/' directory
+    are given in summarized form, i.e. with only the "main" license described
+    in the library's license statement. Different licenses of single files or
+    code snippets in thirdparty libraries are not documented here.
+
+    [Example]
+        Files: external/zlib/*
+        Comment: Additional notes and/or details
+        Copyright: 1995-2017, Jean-loup Gailly and Mark Adler
+        License: Zlib
+
+    The exact copyright for each file in that library *may* differ, and some
+    files or code snippets might be distributed under other compatible licenses
+    (e.g. a public domain dedication), but as far as Fey is concerned
+    such a library is considered as a whole under the Zlib license.
+
+
+    V. Note
+
+    When linking dynamically against thirdparty libraries instead of
+    building them into the Godot binary, you may remove the corresponding
+    license details from this file.
+
+    [Comment]]
+    [Setup]]
+
+    Upstream-Name: Fey
+    Upstream-Contact: Rocco Ruscitti <contact@roccoruscitti.ca>
+    Source: https://github.com/Loreite/Fey
+
+
+    [Files][
+
+    [File]
+      [Pattern]   *
+      [Comment]   Fey
+      [License]   MIT/Expat
+      [Copyright] 2025-present, Rocco Ruscitti
+    [Files]]
+
+
+    [Licenses][
+
+    [License: MIT/Expat][
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+    [License]]
+    [Licenses]]
+
+
+
+
+
