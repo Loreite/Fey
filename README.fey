@@ -1,0 +1,136 @@
+
+
+
+
+
+    I. Fey
+
+
+    `7MM"""YMM
+      MM    `7
+      MM   d  .gP"Ya `7M'   `MF'
+      MM""MM ,M'   Yb  VA   ,V
+      MM   Y 8M""""""   VA ,V
+      MM     YM.    ,    VVV
+    .JMML.    `Mbmmd'    ,V
+                        ,V
+                     OOb"
+
+    II. About
+
+    Fey is a specification for a scriptable markup language, designed to be easily
+    extensible and used for a wide range of applications, from documentation, to
+    configuration files, and data serialization.
+
+
+    II.i. Why scriptable
+
+    The experimental idea is that a Fey interpreter can read Fey instructions that tell it how
+    to interpret new Fey commands (and possibly syntax) that are defined by the user.
+    This should allow for the language to appear different to different users, while still
+    adhering to the same specification for a Fey interpreter.
+
+    This is where Fey gets its name from. In folklore and fantasy, a fey creature is one that
+    contains powerful magic, and is often unpredictable.
+
+    In the same way, Fey should be able to be reshaped and redefined by its users, in a way that
+    is unpredictable at first glance, but is well defined by the instructions which define the
+    additions and/or changes.
+
+
+    III. What does Fey look like
+
+    You're reading Fey right now. This document is written in standard Fey 0.0.1. As are all
+    other documents in the Fey repository.
+
+    Thus, if you want to get a feel for what kinds of things Fey can do out of the box,
+    then read on, and pay attention to the syntax and structure of all the documents.
+
+
+    IV. How to use Fey
+
+    For now, this README is the only direct specification of Fey's syntax and features.
+
+
+    IV.i. Documentaions
+
+    Like most markup languages, Fey has a standard syntax for many features that make
+    writing up a large document easier, with features for headings, lists, tables, etc.
+
+    IV.i.a. Headings
+    You've already been reading the syntax for headings, but the formal definition is that
+    fey uses a '#.' notation for each level of heading. Where '#' is a string of characters
+    that fall into one of the following sets (or a set defined by the user):
+        - Capital Roman Numerals
+            - I, II, III, IV, V, VI, VII, VIII, IX, X ...
+
+        - Lowercase Roman Numerals
+            - i, ii, iii, iv, v, vi, vii, viii, ix, x ...
+
+        - Capital Letters
+            - A, B, C, ... X, Y, Z, AA, AB, AC, ...
+
+        - Lowercase Letters
+            - a, b, c, ... x, y, z, aa, ab, ac, ...
+
+        - Decimal Numbers
+            - 1, 2, 3, ... 10, 11, 12, ...
+
+        - Hexadecimal Numbers
+            - 0x1, 0x2, 0x3, ... 0xA, 0xB, 0xC, ...
+
+        - Binary Numbers
+            - 0b1, 0b10, 0b11, ... 0b1010, 0b1011, 0b1100, ...
+
+
+    The '.' is the separator between the character strings, the count of which determines the
+    level of the heading. The characters strings themselves only specify information about
+    the section ordering.
+
+    [Note]
+        It is highly recommended that the use of an available Fey plugin or extension to your preferred
+        text editor be used to automatically generate the correct heading syntax. Such a plugin should
+        increment the ordering of the relevant level of heading for new headings, or update the ordering
+        of all headings when a heading is moved or deleted.
+
+
+    IV.i.b. Lists
+    Fey has a standard syntax for ordered and unordered lists, which is similar to other markup
+    languages. The syntax is as follows:
+
+    - Unordered lists
+        - Each item in an unordered list is preceded by a '-' character, followed by a space.
+            - other acceptable characters are '*', '+', '='.
+        - The indentation of the '-' character determines the level of the list item.
+        - The indentation of the list item is determined by the number of spaces or tabs before the '-' character.
+
+    [Example]
+        See the lists above and below this example.
+
+
+    - Ordered lists
+        - Each item in an ordered list is preceded the '.' character, followed by an value from an
+            ordered set of characters (e.g. '1', 'a', 'A', 'i', 'I', '0x1', '0b1', etc.), followed by a space.
+        - Or alternatively the ordered character is followed by ':', followed by a space.
+        - The indentation of the '.' character determines the level of the list item.
+        - The indentation of the list item is determined by the number of spaces or tabs before the '.' character.
+
+        - any changes between sets of ordered characters from one list item to the next is considered a new list.
+            - unless explicit ordering is maintained, such as 
+
+    [Example]
+        .1 This is a top level ordered list item.
+            a: This is a second level ordered list item.
+                i: This is a third level ordered list item.
+            b: This is another second level ordered list item.
+        .2 This is another top level ordered list item.
+
+
+        .1 item 1
+        .a item 2
+
+        .1 item 1
+        .1.a item 2
+
+
+
