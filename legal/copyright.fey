@@ -60,13 +60,6 @@
     (e.g. a public domain dedication), but as far as Fey is concerned
     such a library is considered as a whole under the Zlib license.
 
-
-    V. Note
-
-    When linking dynamically against thirdparty libraries instead of
-    building them into the Godot binary, you may remove the corresponding
-    license details from this file.
-
     [Comment]]
     [Setup]]
 
