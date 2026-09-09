@@ -18,33 +18,86 @@
 
   II. About
 
-Fey is a specification for a scriptable markup language, designed to be easily
-extensible and used for a wide range of applications, from documentation, to
-configuration files, and data serialization.
+Fey is a specification for a novel markup language, designed to meet the
+needs of individual expression. Some of the goals are for it to be easily
+extensible via scripting and useable for a wide range of applications from
+documentation to configuration files and data serialization.
 
 
   II.i. Why scriptable
 
-The experimental idea is that a Fey interpreter can read Fey instructions that tell it how
-to interpret new Fey commands (and possibly syntax) that are defined by the user.
-This should allow for the language to appear different to different users, while still
-adhering to the same specification for a Fey interpreter.
+The experimental idea is that a Fey interpreter can read Fey instructions that
+tell it how to interpret new Fey commands (and possibly syntax) that are defined
+by the user. This should allow for the language to appear different to different
+users, while still adhering to the same specification for a Fey interpreter.
 
-This is where Fey gets its name from. In folklore and fantasy, a fey creature is one that
-contains powerful magic, and is often unpredictable.
+This is where Fey gets its name from. In folklore and fantasy, a fey creature is
+one that contains powerful magic, and is often unpredictable.
 
-In the same way, Fey should be able to be reshaped and redefined by its users, in a way that
-is unpredictable at first glance, but is well defined by the instructions which define the
-additions and/or changes.
+In the same way, Fey should be able to be reshaped and redefined by its users,
+in a way that is unpredictable at first glance, but is well defined by the
+instructions which define the additions and/or changes.
+
+We don't know if all of these goals are mutually compatible, but until proven
+otherwise we will exhuast all efforts to create a universally applicable markup
+langauge.
+
+
+  II.ii. First steps
+
+The current milestone goal is to expressly define the core syntax for fey to be
+used in places where Markdown or Org-mode are currently, such as for README
+documentation, writing articles for static site generation, or taking notes for
+a PKM where the data in the notes is readily indexable for searching and
+management.
+
+In conjunction with that goal, a neovim plugin is being developed to make
+editing fey files seamless, with features that are comparable to org-mode when
+it comes to editing notes, such as moving heading subtrees up/down etc.
+
+[url] https://github.com/Loreite/fey.nvim [Fey Markup Language Neovim Plugin]
+
+Though do no expect for a very long time (if ever) that fey will have feature
+parity when it comes to org-mode features like agenda and task tracking, unless
+it becomes a clear point of interest for myself or large portion of the
+community of users. If those features are currently important and/or
+non-negotiable I encourage you to continue to use and support org-mode, and push
+for its wider adoption.
+
+
+  II.iii. Why not Markdown or Org-mode
+
+While these markup languages are incredibly valuable for different reasons:
+
+Markdown is a simple specification widely adopted with a large support for
+advanced features in different software such as obsidian or the Hugo static site
+generator.
+
+Org-mode is a more advanced markup ecosystem with features like an
+agenda etc, and while very expressive with property drawers and keywords, they
+also have limitations that make them unsuitable for use in Hugo for article
+metadata, such as not having proper syntax for nested dictionaries or arrays of
+values.
+
+Ultimately, no matter where we turn, we have to give up some ground to use these
+markup languages, as they don't cover all the purposes we have without bolting
+on YAML frontmatter (a not so terrible solution) for example.
+
+What Fey proposes to do is determine all the ground that has been lost to those
+other languages and cover it explicitly while also filling the same roles they
+are currently fit for. With everchanging needs in mind this is the reason for
+Fey's goal for extensibility, to allow users to define their needs and adapt fey
+to meet them where they are, if that goal is as possible as we imagine it to be.
 
 
   III. What does Fey look like
 
-You're reading Fey right now. This document is written in standard Fey 0.0.1. As are all
-other documents in the Fey repository.
+You're reading Fey right now. This document is written in standard Fey 0.0.1. As
+are all other documents in the Fey repository.
 
-Thus, if you want to get a feel for what kinds of things Fey can do out of the box,
-then read on, and pay attention to the syntax and structure of all the documents.
+Thus, if you want to get a feel for what kinds of things Fey can do out of the
+box, then read on, and pay attention to the syntax and structure of all the
+documents.
 
 
   IV. How to use Fey
@@ -142,36 +195,36 @@ i: This is a third level ordered list item.
 b: This is another second level ordered list item.
 :2. This is another top level ordered list item.
 
-  V.i.C. Tags
-  Right now this is a non-standardized feature. It is constantly in flux as I try to define it conrcretely through use.
+  IV.i.C. Tags
+Right now this is a non-standardized feature. It is constantly in flux as I try to define it conrcretely through use.
 
-  the general idea is that a tag can be one of the following things:
-  - anonymous tag: `[]`
-  - anonymous tag with subject: `[: subject]` or `[: some subject]`
-  - named tag: `[tagname]` or `[tag name]`
-  - named tag with subject: `[tagname: subject]` or `[tag name: some subject]` etc.
+the general idea is that a tag can be one of the following things:
+- anonymous tag: `[]`
+- anonymous tag with subject: `[: subject]` or `[: some subject]`
+- named tag: `[tagname]` or `[tag name]`
+- named tag with subject: `[tagname: subject]` or `[tag name: some subject]` etc.
 
 
-  additionally, tags can be given properties based on the group of characters which immediate preced or immediately follow the tag
-  - heading linking
-    cannot be anonymous (for now at least it is undefined)
-    the name should be the filename of the document the heading is in
-      - '[]#' - for internal links
-      - '#[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
-  - tag linking
-    cannot be anonymous (for now at least it is undefined)
-    the name/subject of the link tag must match exactly the name/subject of the tag it is linking to.
-    - '[]@' - for internal links
-    - '@[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
-  - Monospaced text block
-    the name of the tags should either match, or the closing tag can be anonymous.
-    the name of the tags inform the interpreter what language syntax highlighting to use, ie. 'zig', 'c', 'python', etc.
-      - '[]{' open monospaced text block
-      - '}[]' close monospaced text block
+additionally, tags can be given properties based on the group of characters which immediate preced or immediately follow the tag
+- heading linking
+cannot be anonymous (for now at least it is undefined)
+the name should be the filename of the document the heading is in
+    - '[]#' - for internal links
+    - '#[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
+- tag linking
+cannot be anonymous (for now at least it is undefined)
+the name/subject of the link tag must match exactly the name/subject of the tag it is linking to.
+- '[]@' - for internal links
+- '@[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
+- Monospaced text block
+the name of the tags should either match, or the closing tag can be anonymous.
+the name of the tags inform the interpreter what language syntax highlighting to use, ie. 'zig', 'c', 'python', etc.
+    - '[]{' open monospaced text block
+    - '}[]' close monospaced text block
 
-  - Line-wise tags
-    - '[]:' - all of the content up to the next newline is considered the body of the tag
-    - ':[]' - all of the content preceding the tag on the current line is considered the body of the tag
+- Line-wise tags
+- '[]:' - all of the content up to the next newline is considered the body of the tag
+- ':[]' - all of the content preceding the tag on the current line is considered the body of the tag
 
 
 LIST EXAMPLES Exhaustive testing...
@@ -244,3 +297,5 @@ b- item 4
 c- item 5
 i- item 6
 ii- item 7
+
+

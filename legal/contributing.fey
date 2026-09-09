@@ -3,7 +3,7 @@
 
 
 
-I. Contributors guidelines
+  I. Contributors guidelines
 
 This document summarizes the most important points for people interested in
 contributing to Fey, especially via bug reports or pull requests.
@@ -12,7 +12,7 @@ The Fey documentation has a dedicated [Contributing section](tbd)
 which details these points and more, and is a recommended read.
 
 
-I.i. Table of contents
+  I.i. Table of contents
 
 - [Reporting bugs]()
 - [Proposing features or improvements]()
@@ -21,35 +21,35 @@ I.i. Table of contents
 - [Communicating with developers]()
 
 
-I.ii. Reporting bugs
+  I.ii. Reporting bugs
 
-I.ii.a. Where to report bugs
+  I.ii.a. Where to report bugs
 
 Report bugs [here]().
 Please follow the instructions in the template when you do.
 
 
-I.ii.b. Verify first
+  I.ii.b. Verify first
 
 - Check the bug is reproducible
 - Check if the bug has already been reported.
 - Check if the bug is fixed in the latest master branch.
 
 
-I.ii.c. What to include in a bug report
+  I.ii.c. What to include in a bug report
 
 - include MRP (compressed archive)
 - exclude erroneous files/directors/information in compressed archive
 
 
-I.iii. Proposing features or improvements
+  I.iii. Proposing features or improvements
 
-I.iii.a. Where to propose features
+  I.iii.a. Where to propose features
 
 - propose features [here]() as an issue (for the time being).
 
 
-I.iii.b. Verify first
+  I.iii.b. Verify first
 
 - Check if the feature is already being worked on.
 - Check if the feature is already implemented in the latest master branch.
@@ -57,35 +57,35 @@ I.iii.b. Verify first
 - Check if the feature has been proposed before.
 
 
-I.iii.b. What to include in a feature proposal
+  I.iii.c. What to include in a feature proposal
 
 - Include a detailed description of the feature.
 - Include a use case for the feature.
 - (Optionally) Include a description of how the feature could be implemented.
 
 
-I.iv. Contributing pull requests
+  I.iv. Contributing pull requests
 
-I.iv.a. Due your due diligence
+  I.iv.a. Due your due diligence
 
 - Check that the functionality is desired, which means that it solves a common use case.
 - Check with other developers on how to implement it best.
 
 
-I.iv.b. What to remember about pull requests
+  I.iv.b. What to remember about pull requests
 
 - Even after doing your due diligence the PR is an opprotunity, not a guarantee.
 - If it doesn't get merged, your PR is useful for future work by another developer.
 - Your PR will remain in the project history as proof of your efforts.
 
 
-I.iv.c. Bug fixes
+  I.iv.c. Bug fixes
 
 Similar rules can be applied when contributing bug fixes
 - it's always best to discuss the implementation in the bug report first
 
 
-I.iv.d. Be mindful of your commits
+  I.iv.d. Be mindful of your commits
 
 Try to make simple PRs that handle one specific topic. Just like for reporting
 issues, it's better to open 3 different PRs that each address a different issue
@@ -102,7 +102,7 @@ commit, try to merge them together before making your pull request. This
 includes fixing build issues or typos, adding documentation, etc.
 
 
-I.iv.e. Format your commit messages with readability in mind
+  I.iv.e. Format your commit messages with readability in mind
 
 The way you format your commit messages is quite important to ensure that the
 commit history and changelog will be easy to read and understand. A Git commit
@@ -142,7 +142,7 @@ feature, *please* edit the commit title to something meaningful. Commits named
 "Update my_file.cpp" won't be accepted.
 
 
-I.iv.f. Document your changes
+  I.iv.f. Document your changes
 
 If your pull request adds new features or changes existing ones, make sure to
 update the relevant documentation.
@@ -176,7 +176,7 @@ existing tests as well.
 [OPTIONAL] I.v. Contributing to Fey translations
 
 
-I.vi. Communicating with developers
+  I.v. Communicating with developers
 
 The Fey community has [many communication channels](tbd),
 some used more for user-level discussions and support,
