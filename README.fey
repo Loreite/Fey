@@ -143,7 +143,7 @@ the following predefined ordered sets (or a set defined by the user):
     - 1, 2, 3, ... 8, 9, 10, 11, 12, ...
 
     - Hexadecimal Numbers
-    - 0x1, 0x2, 0x3, ... 0xA, 0xB, 0xC, ...
+    - 0x1, 0x2, 0x3, ... 0xd, 0xe, 0xf, 0x10, 0x11, 0x12 ...
 
     - Binary Numbers
     - 0b1, 0b10, 0b11, ... 0b1010, 0b1011, 0b1100, ...
@@ -573,6 +573,8 @@ the name of the tags inform the interpreter what language syntax highlighting to
 - Line-wise tags
 - '[]:' - all of the content up to the next newline is considered the body of the tag
 - ':[]' - all of the content preceding the tag on the current line is considered the body of the tag
+
+
 
 
 LIST EXAMPLES Exhaustive testing...
