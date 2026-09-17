@@ -76,6 +76,11 @@ Source: https://github.com/Loreite/Fey
   [Comment]   Fey
       [License]   MIT/Expat
   [Copyright] 2025-present, Aldo Zeroun
+
+[File]
+    [Pattern]   /images/fey_logo.png
+    [Comment]   Fey logo
+    [Copyright] 2026, Aldo Zeroun. All rights Reserved.
 [Files]]
 
 

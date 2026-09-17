@@ -1,10 +1,11 @@
 
 
-[div# align: center]
-    [#img src: ./images/fey_logo.png, width: 256, height: 256, alt: "Fey Logo"#]
-[#div]
+#+html:<div# align="center">
+#+html:    <img src="./images/fey_logo.png" width="256" height="256" alt="Fey Logo"/>
+#+html:    <hr>
+#+html:</div>
 
-
+#+begin_src fey
   I. Fey
 
 
@@ -649,5 +650,6 @@ b- item 4
 c- item 5
 i- item 6
 ii- item 7
+#+end_src
 
 
