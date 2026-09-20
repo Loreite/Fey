@@ -1,0 +1,90 @@
+
+
+
+
+
+  I. Fey Logo
+
+[img# src: /images/fey_logo.png #] (TM)
+
+
+  I.A. Copyright Notice
+
+(c) 2026 Aldo Zeroun. All rights reserved.
+
+
+  II. Trademark Notice
+
+Fey™ and the Fey logo™ are trademarks of Aldo Zeroun. All rights reserved.
+
+
+  II.A. Guidelines & Permissions
+
+"Fey" and the Fey logo are trademarks representing the official Fey markup
+language project. While our open-source software license governs the underlying
+code, this trademark policy governs the use of our name and brand identity.
+
+If you have questions regarding brand usage or wish to request permission for a
+specific use case, please open an issue in the project repository.
+
+
+  II.A.i. Permitted Uses (No Permission Required)
+
+You are encouraged to use the Fey name and logo without prior written approval
+in the following scenarios:
+
+    *  Compatibility & Identification:
+       You may use "Fey" in plain text to truthfully state that your software,
+       plugin, tool, or library supports, parses, formats, or is written in the
+       Fey markup language (e.g., "Fey plugin for Neovim", "A Fey-compatible
+       parser in Rust").
+
+    *  Community & Educational Content:
+       You may use the name and logo in blog posts, tutorials, documentation,
+       academic papers, and talks discussing or teaching the Fey language.
+
+    *  Non-Commercial Reference:
+       You may reference Fey to accurately link to the official project,
+       repository, or specification.
+
+
+  II.A.ii. Usage Requirements
+
+When using the Fey trademark under these permitted uses, please adhere to these
+guidelines:
+
+    1.  No Implied Endorsement:
+        Your use must not imply official sponsorship, affiliation, endorsement, or
+        approval by the Fey project maintainers. 
+
+    2.  Naming Distinction:
+        Your project, repository, or package name must not use "Fey" as its
+        primary name or lead brand. For example, use "Awesome-Tool for Fey"
+        instead of "Fey Tool".
+
+    3.  No Confusion:
+        Do not use the Fey logo or name in a way that is likely to confuse users
+        about whether your software or resource is the official implementation.
+
+    4.  Distinction of Mark:
+        Where practical, append the ™ symbol on the first or most prominent
+        occurrence (e.g., Fey™ markup language).
+
+
+  II.A.iii. Uses Requiring Prior Approval
+
+You must obtain explicit written permission from the maintainers before using
+the Fey trademark or logo in any of the following ways:
+
+    *  Using "Fey" or the Fey logo as the main visual identity or brand of a
+       commercial product, service, or company.
+
+    *  Modifying, altering, or creating derivative versions of the official Fey
+       logo for branding purposes.
+
+    *  Registering domain names, social media handles, or trademarks containing
+       "Fey" in relation to software, markup formats, or developer tooling.
+
+
+
+
