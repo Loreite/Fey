@@ -8,7 +8,7 @@
 
     ~~~
                                                             .*MMMMMMMMMM
-                                                         AMMMMMMMMMMMMMMM
+                                                         AMMMMMMMMMMMMMMM  TM
                                                       AMMMMMMMMMMMMMMMMMM
                                                    AMMMMMMMMMMMMMMMMMMMM
                                                 :MMMMMMMMMMMMMMMMMMMMMM:
@@ -27,18 +27,18 @@
                             MMMMM      ,MMMMMMMV*       ,MMMM
                            MMMM*     ,MMMMMV           AMMM*
                           MMMM*    ,MMMV*            AMMMM:
-                         MMMM'   ,MMMV             AMMMMM
-                        MMMM'  ,MMV'           ,AMMMMMV
-                       MMMM' ,MMV          ,MMMMMMMV'
-                      MMMM',MMV        ,AMMMMMMMMMMA**..
-                     MMMM,MMV    ,AMMMMMMMMMMMMMMMMMMMMMMM:
-                    MMMMMMM**MMMMMMMMMMMMMV**""     "*MMMMM=
-                   *MMMMMMMMMMMMMMM*                    MMM*
-                  *MMMMMMMMMMMMMMMMMMMMMA,             MMMM
-                 *MMMMMMMMMMMMV*""""""*VMMMMMMA,     *MMMM
-                *MMMMMMMMMMMM               'VMMMMM*MMMM*
-               MMMMMMMM *MMMMMMA                 MMMMMV
-           ,AMMMMMMMMM     *MMMMMA.          ,AMMMMMV
+                        .MMMM'   ,MMMV             AMMMMM
+                       .MMMM'  ,MMV'           ,AMMMMMV
+                      .MMMM' ,MMV          ,MMMMMMMV'
+                     .MMMM',MMV        ,AMMMMMMMMMMA**..
+                    .MMMM,MMV    ,AMMMMMMMMMMMMMMMMMMMMMMMi
+                   ,MMMMMMM**MMMMMMMMMMMMMV**""     "*MMMMM*
+                   MMMMMMMMMMMMMMMM*                    MMM*
+                  AMMMMMMMMMMMMMMMMMMMMMA,             MMMM
+                 AMMMMMMMMMMMMV*""""""*VMMMMMMA,     *MMMM
+                AMMMMMMMMMMMM               'VMMMMM*MMMM*
+               AMMMMMMM`*MMMMMMA                 MMMMMV
+          ,AMMMMMMMMMM     *MMMMMA.          ,AMMMMMV
           AMMMMMMMMMM,        VMMMMMMMMMMMMMMMMMMV'
            'MMMMMMMMMMA          VMMMMMMMMMMMMV'
            AMMMMMMMMMM'
@@ -46,12 +46,12 @@
       AMMMMMMMMMM.
       :MMMM"MMMMMM       `7MM"""YMM
       :MMM   MMMMM'        MM    `7
-      ,MMV AMMMMMV         MM   d  .gP"Ya `7M'   `MF'
-      MMM .MMV'            MM""MM ,M'   Yb  VA   ,V
-    MMMM .MM'              MM   Y 8M""""""   VA ,V
-    MMM .MMM.              MM     YM.    ,    VVV
-   :MM .MMV              .JMML.    `Mbmmd'    ,V
-   ,M .MV                                    ,V
+      ,MMV AMMMMMV         MM   d  .gP"Ya `7M'   `MF' TM
+      MMV .MMV'            MM""MM ,M'   Yb  VA   ,V
+   .VMMV .MM'              MM   Y 8M""""""   VA ,V
+   iMMV .MMMV              MM     YM.    ,    VVV
+   iMV .MMV`             .JMML.    `Mbmmd'    ,V
+   lV .MV`                                   ,V
    V ,V'                                  OOb"
 
     ~~~
@@ -69,7 +69,7 @@ Some arbitrary choices are made that try to align with expected norms, but
 otherwise Fey strives to break away from what one might consider 'standard'.
 
 
-  I.A. Why scriptable
+  I.B. Why scriptable
 
 The experimental idea is that a Fey interpreter can read Fey instructions that
 tell it how to interpret new Fey commands (and possibly syntax) that are defined
@@ -88,7 +88,7 @@ otherwise we will exhuast all efforts to create a universally applicable markup
 langauge.
 
 
-  I.B. First steps
+  I.C. First steps
 
 The current milestone goal is to expressly define the core syntax for fey to be
 used in places where Markdown or Org-mode are currently, such as for README
@@ -110,7 +110,7 @@ non-negotiable I encourage you to continue to use and support org-mode, and push
 for its wider adoption.
 
 
-  I.C. Why not Markdown or Org-mode
+  I.D. Why not Markdown or Org-mode
 
 While these markup languages are incredibly valuable for different reasons:
 
