@@ -1,24 +1,60 @@
+[#img ./images/fey_logo.png, 256, 256, alt: "Fey Logo", align: center #]
 
 
-[div# align: center]
-    [#img src: ./images/fey_logo.png, width: 256, height: 256, alt: "Fey Logo"#]
-[#div]
 
 
-  I. Fey
 
+  I. About
 
-    `7MM"""YMM
-      MM    `7
-      MM   d  .gP"Ya `7M'   `MF'
-      MM""MM ,M'   Yb  VA   ,V
-      MM   Y 8M""""""   VA ,V
-      MM     YM.    ,    VVV
-    .JMML.    `Mbmmd'    ,V
-                        ,V
-                     OOb"
+    ~~~
+                                                             *##########
+                                                         ################
+                                                      ###################
+                                                   #####################
+                                                :######################:
+                                              +#######################-
+                                            *########################-
+                                          +#########################-
+                                        :##########################+
+                                       #####################:  ####
+                                     *######:    #######+     ####
+                                    ######      *#####       *###=
+                                  *#####       =###*         ####
+                                 #####        ####          ####
+                                #####        ###           *###=
+                              +####:       ###=    -###########
+                             #####       *### ########*- :####
+                            #####      +########:       =####
+                           ####*     =######           ####*
+                          ####+    =####=            #####:
+                         ####-   =####             ######
+                        ####:  -###:           :#######
+                       ####- :###          :########:
+                      ####-:###        *#############*=
+                     ####=###    -########################:
+                    #######--###############+=:     -*#####=
+                   *###############=                    ###*
+                  *######################*             ####
+                 *#############*++==+*#########-     *####
+                *############               :######*####*
+               ######## *#######                 ######
+            ##########     -######=          -#######
+           ##########         ####################-
+           :#########            ##############
+           ##########-
+       *############
+      ###########=
+      :####-######       `7MM"""YMM
+      :###   #####-        MM    `7
+      =### #######+        MM   d  .gP"Ya `7M'   `MF'
+      ### ####:            MM""MM ,M'   Yb  VA   ,V
+    #### ###               MM   Y 8M""""""   VA ,V
+    ### ####               MM     YM.    ,    VVV
+   :## ####              .JMML.    `Mbmmd'    ,V
+   *# ##=                                    ,V
+   # #:                                   OOb"
 
-  II. About
+    ~~~
 
 Fey is a specification for a novel markup language, designed to meet the
 needs of individual expression. Some of the goals are for it to be easily
@@ -33,7 +69,7 @@ Some arbitrary choices are made that try to align with expected norms, but
 otherwise Fey strives to break away from what one might consider 'standard'.
 
 
-  II.A. Why scriptable
+  I.A. Why scriptable
 
 The experimental idea is that a Fey interpreter can read Fey instructions that
 tell it how to interpret new Fey commands (and possibly syntax) that are defined
@@ -52,7 +88,7 @@ otherwise we will exhuast all efforts to create a universally applicable markup
 langauge.
 
 
-  II.B. First steps
+  I.B. First steps
 
 The current milestone goal is to expressly define the core syntax for fey to be
 used in places where Markdown or Org-mode are currently, such as for README
@@ -74,7 +110,7 @@ non-negotiable I encourage you to continue to use and support org-mode, and push
 for its wider adoption.
 
 
-  II.C. Why not Markdown or Org-mode
+  I.C. Why not Markdown or Org-mode
 
 While these markup languages are incredibly valuable for different reasons:
 
@@ -99,7 +135,7 @@ Fey's goal for extensibility, to allow users to define their needs and adapt fey
 to meet them where they are, if that goal is as possible as we imagine it to be.
 
 
-  III. What does Fey look like
+  II. What does Fey look like
 
 You're reading Fey right now. This document is written in standard Fey 0.0.2. As
 are all other documents in the Fey repository.
@@ -109,46 +145,46 @@ box, then read on, and pay attention to the syntax and structure of all the
 documents.
 
 
-  IV. How to use Fey
+  III. How to use Fey
 
 For now, this README is the only direct specification of Fey's syntax and features.
 
 
-  V. Documentation
+  IV. Documentation
 
 Like most markup languages, Fey has a standard syntax for many features that make
 writing up a large document easier, with features for headings, lists, tables, etc.
 
 
-  V.A. Headings
+  IV.A. Headings
 
-  V.A.i. Segments, Tokens, Ordered Sets
+  IV.A.i. Segments, Tokens, Ordered Sets
 
 You've already been reading the syntax for headings, but the formal definition
 is that fey uses a '<token><delimiter>' (called a segment) notation for each
 level of heading. Where 'token' is a string of characters that fall into one of
 the following predefined ordered sets (or a set defined by the user):
 
-    - Capital Roman Numerals
-    - I, II, III, IV, V, VI, VII, VIII, IX, X ...
+    -  Capital Roman Numerals
+    -  I, II, III, IV, V, VI, VII, VIII, IX, X ...
 
-    - Lowercase Roman Numerals
-    - i, ii, iii, iv, v, vi, vii, viii, ix, x ...
+    -  Lowercase Roman Numerals
+    -  i, ii, iii, iv, v, vi, vii, viii, ix, x ...
 
-    - Capital Letters
-    - A, B, C, ... X, Y, Z, AA, AB, AC, ...
+    -  Capital Letters
+    -  A, B, C, ... X, Y, Z, AA, AB, AC, ...
 
-    - Lowercase Letters
-    - a, b, c, ... x, y, z, aa, ab, ac, ...
+    -  Lowercase Letters
+    -  a, b, c, ... x, y, z, aa, ab, ac, ...
 
-    - Decimal Numbers
-    - 1, 2, 3, ... 8, 9, 10, 11, 12, ...
+    -  Decimal Numbers
+    -  1, 2, 3, ... 8, 9, 10, 11, 12, ...
 
-    - Hexadecimal Numbers
-    - 0x1, 0x2, 0x3, ... 0xd, 0xe, 0xf, 0x10, 0x11, 0x12 ...
+    -  Hexadecimal Numbers
+    -  0x1, 0x2, 0x3, ... 0xd, 0xe, 0xf, 0x10, 0x11, 0x12 ...
 
-    - Binary Numbers
-    - 0b1, 0b10, 0b11, ... 0b1010, 0b1011, 0b1100, ...
+    -  Binary Numbers
+    -  0b1, 0b10, 0b11, ... 0b1010, 0b1011, 0b1100, ...
 
 Each ordered set is defined by its initial token of its ordering. So all
 subsequent headings will be ordered at any given depth based on the first token
@@ -158,23 +194,23 @@ them only order at that depth for a given subtree.
 (It is also possible to undefine an ordered set in order to free up a character)
 
 
-  V.A.ii. Delimiters, Anonymity, Prefix
+  IV.A.ii. Delimiters, Anonymity, Prefix
 
-The 'delimiter' is the separator between the character strings, the count of
-which determines the depth or level of the heading. The character strings
-themselves only specify information about the section ordering.
+The 'delimiter' is the separator between the tokens, the count of which
+determines the depth or level of the heading. The tokens themselves only specify
+information about the section ordering.
 
 The 'delimiter' can also be defined by the user to be any character not found
 in one of the ordered sets. The current set of delimiters is:
 
-    - [. , : ; ! ? \ / - + * @ # $ & %]
+    . , : ; ! ? \ / ' " ` - + * = ~ ^ @ # $ & % [ ] ( ) { } < >
 
 For any given heading segment, the token can be left empty or 'anonymous' (see
 below). Altogether the sequence of segments is collectively called the heading
 'signature'.
 
 
-  V.A.iii. All parts together
+  IV.A.iii. All parts together
 
 Headings are also defined by the specification to begin with two spaces before
 the signature followed by a space and then the 'title' which is all the plain-text
@@ -189,9 +225,9 @@ Here are some examples of headings:
 
   .... Anonymous heading
   ..iii.. This is a partially anonymous heading
-  V.A..a. This is also a partially anonymous heading
+  IV.A..a. This is also a partially anonymous heading
 
-  V.A.iii.b. "'IV.i.A.b.' is the signature, but everything in quotes is the title"
+  IV.A.iii.b. "'IV.i.A.b.' is the signature, but everything in quotes is the title"
 
   !!!! Note
     It is highly recommended that the use of an available Fey plugin or extension to
@@ -203,25 +239,34 @@ Here are some examples of headings:
     See link to fey.nvim above for neovim support.
 
 
-  V.B. Lists
+  IV.B. Lists
 
-Fey has a standard syntax for ordered and unordered lists, which is similar to
-other markup languages. The syntax is as follows:
+Fey's ordered and unordered lists are as equally as expressive as headings,
+using the same '<token><delimiter>' segment to partially define itself. See
+seciton V.A.i. for more information on segments.
+
+The second condition that defines a list is that the segment must be followed by
+a mix of two spaces or tabs before the body content/paragraph.
+
+Lists may be indented any number of spaces ex
 
 
-  V.B.i. Unordered lists
+  IV.B.i. Unordered lists
 
-Unordered lists are are very simple and come in a few variations:
+Unordered lists are are the most simple, an use an anonymous segment which
+forgoes having a token:
 
-    - Each item in an unordered list is preceded by a character from a defined set, followed by a space.
-        - the standard defined set is { * + - = . }
+    :  Each item in an unordered list is preceded by a character from a defined
+       set, followed by a space.
+
+        :  the standard defined set is { * + - = . }
     - The indentation of the start character determines the list level of the list item.
 
 [Example]
 See the lists above and below this example.
 
 
-  V.B.ii. Ordered lists
+  IV.B.ii. Ordered lists
 
 Ordered lists are a bit more complex than unordered lists, but still follow a simple syntax:
 
@@ -243,140 +288,7 @@ b: This is another second level ordered list item.
 :2. This is another top level ordered list item.
 
 
-  V.C. Superscripts and Subscripts
-
-To indicate superscripts, we can use '^' (caret) between the single 'carrier'
-word or number and the superscript text or 'load'. If the carrier or load
-contains an '_' (underscore) or the load contains multiple space delimited
-words, numbers, or symbols, either side can be surrounded by a Plain Tag (see
-Plain Tags) to remove ambiguity.
-
-Similarly, subscripts use a '_' (underscore) between the single carrier and the
-load. Plain tags can again be used to remove ambiguity if there are underscores
-in the carrier or load, or the load contains multiple space delimited words,
-numbers, or symbols.
-
-'''
-carrier^load 9.5^4 {10_000_000}^(the moon)
-carrier_load 9.5_4 {10_000_000}_(the moon)
-'''
-
-Six settings are available to set whether Plain tags are required when using a
-live renderer, on export to a staic format, or used by an editor to show pretty
-wysiwyg text such as in neovim. When they are true, Plain tags are optional;
-when they are false, Plain tags are required. By default they are all true.
-
-    - fey-render-subscripts
-    - fey-export-subscripts
-    - fey-pretty-subscripts
-    - fey-render-superscripts
-    - fey-export-superscripts
-    - fey-pretty-superscripts
-
-Lastly, the plugin for your editor of choice should provide commands that can
-toggle on/off showing wysiwyg super-/sub-scripts individually or together.
-
-In the fey.nvim plugin for example we have:
-
-    - FeyTogglePrettySuperscript
-    - FeyTogglePrettySubscript
-    - FeyPrettySubSuperscriptOn
-    - FeyPrettySubSuperscriptOff
-
-
-  V.D. Emphasis
-
-| emphasis      | clr, hl    | style     |
-|---------------+------------+-----------|
-| _this text_   | fg         | underline |
-| !this text!   | fg         | bold      |
-| /this text/   | fg         | italic    |
-| ~this text~   | fg         | strike    |
-|---------------+------------+-----------|
-| __this text__ | bg, fg     | underline |
-| !!this text!! | bg, fg     | bold      |
-| //this text// | bg, fg     | italic    |
-| ~~this text~~ | bg, fg     | strike    |
-|---------------+------------+-----------|
-| $this text$   | red        |           |
-| ^this text^   | orange     |           |
-| *this text*   | green      |           |
-| &this text&   | yellow     |           |
-| %this text%   | fuscia     |           |
-| \this text\   | blue       |           |
-| =this text=   | purple     |           |
-| -this text-   | teal       |           |
-| +this text+   | bg2        |           |
-|---------------+------------+-----------|
-| $$this text$$ | bg, red    | highlight |
-| ^^this text^^ | bg, orange | highlight |
-| **this text** | bg, green  | highlight |
-| &&this text&& | bg, yellow | highlight |
-| %%this text%% | bg, fuscia | highlight |
-| \\this text\\ | bg, blue   | highlight |
-| ==this text== | bg, purple | highlight |
-| --this text-- | bg, teal   | highlight |
-| ++this text++ | bg, fg2    | highlight |
-|---------------+------------+-----------|
-| #this text#   |            |           |
-| ?this text?   |            |           |
-| .this text.   |            |           |
-| ,this text,   |            |           |
-| :this text:   |            |           |
-| ;this text;   |            |           |
-|---------------+------------+-----------|
-| ##this text## |            |           |
-| ??this text?? |            |           |
-| ..this text.. |            |           |
-| ,,this text,, |            |           |
-| ::this text:: |            |           |
-| ;;this text;; |            |           |
-|---------------+------------+-----------|
-| `this text`   |            |           |
-| 'this text'   |            |           |
-| "this text"   |            |           |
-|---------------+------------+-----------|
-| ``this text`` |            |           |
-| ''this text'' |            |           |
-| ""this text"" |            |           |
-|---------------+------------+-----------|
-
-
-  V.E. Raw Text Blocks
-
-| name       | begin | end | meaning |
-|------------+-------+-----+---------|
-| dash       | ---   | --- |         |
-| underscore | ___   | ___ |         |
-| tilde      | ~~~   | ~~~ |         |
-| plus       | +++   | +++ |         |
-| equal      | ===   | === |         |
-|------------+-------+-----+---------|
-| bang       | !!!   | !!! |         |
-| intero     | ???   | ??? |         |
-| dollar     | $$$   | $$$ |         |
-| at         | @@@   | @@@ |         |
-| hash       | ###   | ### |         |
-| percent    | %%%   | %%% |         |
-| ampersand  | &&&   | &&& |         |
-|------------+-------+-----+---------|
-| asterisk   | ***   | *** |         |
-| caret      | ^^^   | ^^^ |         |
-| backtick   | ```   | ``` |         |
-| s-quote    | '''   | ''' |         |
-| d-quote    | """   | """ |         |
-|------------+-------+-----+---------|
-| b-slash    | \\\   | /// |         |
-| f-slash    | ///   | \\\ |         |
-|------------+-------+-----+---------|
-| dot        | ...   | ... |         |
-| comma      | ,,,   | ,,, |         |
-| colon      | :::   | ::: |         |
-| s-colon    | ;;;   | ;;; |         |
-|------------+-------+-----+---------|
-
-
-  V.F. Tags
+  IV.C. Tags
 
 Tags in Fey are a versatile component of Fey's syntax used for either syntactic
 markup, structural markup, or data serialization.
@@ -408,7 +320,7 @@ type of tag it is.
 |----------------+---------+---------+---------+---------|
 
 
-  V.F.i. Plain Tags
+  IV.C.i. Plain Tags
 
 The plain tag contains no name or metadata. It is defined as just a pair of
 brackets, braces, parentheses, or chevrons with generic inner content that has no
@@ -419,7 +331,7 @@ Defining it this way allows Fey to refer back to text that is marked up this way
 easily as a 'plain tag' elsewhere in this documentation.
 
 
-  V.F.ii. Line Tags
+  IV.C.ii. Line Tags
 
 Line tags are non-nesting inline tags which consumes the text on the same line
 after itself as its body up to the next occurence of its token or optionally
@@ -436,7 +348,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more information on lists.
 
 
-  V.F.iii. Block Tags
+  IV.C.iii. Block Tags
 
 And then there is the nesting, whitespace indentation respecting tag such as
 '#[]' which consumes both the rest of the line after itself as its head, and the
@@ -452,7 +364,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more informiation on maps.
 
 
-  V.F.iv. Paired Open/Close Tags
+  IV.C.iv. Paired Open/Close Tags
 
 Finally, we have nestable paired tags which are like plain tags in that they
 only contain a name and metadata. They perform much like structural html or xml
@@ -526,7 +438,140 @@ paired tags, like so...
 [/html]
 '''
 
-  V.G. Data Serialization
+  IV.D. Superscripts and Subscripts
+
+To indicate superscripts, we can use '^' (caret) between the single 'carrier'
+word or number and the superscript text or 'load'. If the carrier or load
+contains an '_' (underscore) or the load contains multiple space delimited
+words, numbers, or symbols, either side can be surrounded by a Plain Tag (see
+Plain Tags) to remove ambiguity.
+
+Similarly, subscripts use a '_' (underscore) between the single carrier and the
+load. Plain tags can again be used to remove ambiguity if there are underscores
+in the carrier or load, or the load contains multiple space delimited words,
+numbers, or symbols.
+
+'''
+carrier^load 9.5^4 {10_000_000}^(the moon)
+carrier_load 9.5_4 {10_000_000}_(the moon)
+'''
+
+Six settings are available to set whether Plain tags are required when using a
+live renderer, on export to a staic format, or used by an editor to show pretty
+wysiwyg text such as in neovim. When they are true, Plain tags are optional;
+when they are false, Plain tags are required. By default they are all true.
+
+    - fey-render-subscripts
+    - fey-export-subscripts
+    - fey-pretty-subscripts
+    - fey-render-superscripts
+    - fey-export-superscripts
+    - fey-pretty-superscripts
+
+Lastly, the plugin for your editor of choice should provide commands that can
+toggle on/off showing wysiwyg super-/sub-scripts individually or together.
+
+In the fey.nvim plugin for example we have:
+
+    - FeyTogglePrettySuperscript
+    - FeyTogglePrettySubscript
+    - FeyPrettySubSuperscriptOn
+    - FeyPrettySubSuperscriptOff
+
+
+  IV.E. Emphasis
+
+| emphasis      | clr, hl    | style     |
+|---------------+------------+-----------|
+| _this text_   | fg         | underline |
+| !this text!   | fg         | bold      |
+| /this text/   | fg         | italic    |
+| ~this text~   | fg         | strike    |
+|---------------+------------+-----------|
+| __this text__ | bg, fg     | underline |
+| !!this text!! | bg, fg     | bold      |
+| //this text// | bg, fg     | italic    |
+| ~~this text~~ | bg, fg     | strike    |
+|---------------+------------+-----------|
+| $this text$   | red        |           |
+| ^this text^   | orange     |           |
+| *this text*   | green      |           |
+| &this text&   | yellow     |           |
+| %this text%   | fuscia     |           |
+| \this text\   | blue       |           |
+| =this text=   | purple     |           |
+| -this text-   | teal       |           |
+| +this text+   | bg2        |           |
+|---------------+------------+-----------|
+| $$this text$$ | bg, red    | highlight |
+| ^^this text^^ | bg, orange | highlight |
+| **this text** | bg, green  | highlight |
+| &&this text&& | bg, yellow | highlight |
+| %%this text%% | bg, fuscia | highlight |
+| \\this text\\ | bg, blue   | highlight |
+| ==this text== | bg, purple | highlight |
+| --this text-- | bg, teal   | highlight |
+| ++this text++ | bg, fg2    | highlight |
+|---------------+------------+-----------|
+| #this text#   |            |           |
+| ?this text?   |            |           |
+| .this text.   |            |           |
+| ,this text,   |            |           |
+| :this text:   |            |           |
+| ;this text;   |            |           |
+|---------------+------------+-----------|
+| ##this text## |            |           |
+| ??this text?? |            |           |
+| ..this text.. |            |           |
+| ,,this text,, |            |           |
+| ::this text:: |            |           |
+| ;;this text;; |            |           |
+|---------------+------------+-----------|
+| `this text`   |            |           |
+| 'this text'   |            |           |
+| "this text"   |            |           |
+|---------------+------------+-----------|
+| ``this text`` |            |           |
+| ''this text'' |            |           |
+| ""this text"" |            |           |
+|---------------+------------+-----------|
+
+
+  IV.F. Raw Text Blocks
+
+| name       | begin | end | meaning |
+|------------+-------+-----+---------|
+| dash       | ---   | --- |         |
+| underscore | ___   | ___ |         |
+| tilde      | ~~~   | ~~~ |         |
+| plus       | +++   | +++ |         |
+| equal      | ===   | === |         |
+|------------+-------+-----+---------|
+| bang       | !!!   | !!! |         |
+| intero     | ???   | ??? |         |
+| dollar     | $$$   | $$$ |         |
+| at         | @@@   | @@@ |         |
+| hash       | ###   | ### |         |
+| percent    | %%%   | %%% |         |
+| ampersand  | &&&   | &&& |         |
+|------------+-------+-----+---------|
+| asterisk   | ***   | *** |         |
+| caret      | ^^^   | ^^^ |         |
+| backtick   | ```   | ``` |         |
+| s-quote    | '''   | ''' |         |
+| d-quote    | """   | """ |         |
+|------------+-------+-----+---------|
+| b-slash    | \\\   | /// |         |
+| f-slash    | ///   | \\\ |         |
+|------------+-------+-----+---------|
+| dot        | ...   | ... |         |
+| comma      | ,,,   | ,,, |         |
+| colon      | :::   | ::: |         |
+| s-colon    | ;;;   | ;;; |         |
+|------------+-------+-----+---------|
+
+
+  IV.G. Data Serialization
 
 For data serialization in Fey, we use two specifc data structurs, the list ':'
 and the map '#'. These tags can be plain anonymous data, or have their own
@@ -534,7 +579,7 @@ name and metadata associated with them. eg. '[name| key value ...]'
 
 
 
-  V.H. Actions
+  IV.H. Actions
 
 |------------+--+--|
 | [[this]]   |  |  |
