@@ -213,7 +213,7 @@ below). Altogether the sequence of segments is collectively called the heading
 
   IV.A.iii. All parts together
 
-Headings are also defined by the specification to begin with two spaces before
+Headings are also defined by the specification to begin with two (2) spaces before
 the signature followed by a space and then the 'title' which is all the plain-text
 until the end of the line.
 
@@ -221,6 +221,8 @@ The leading two spaces help the parser identify headings from standard lines of
 text that begin like 'endofasentence. new sentence'. It also creates a clear
 visual distinction for a reader of the plain text (when no syntax highlighting
 is available) where a heading is relative to its body content.
+
+Other than Lists, no other Fey syntactic objects may be indented two (2) spaces.
 
 Here are some examples of headings:
 
@@ -231,11 +233,12 @@ Here are some examples of headings:
   IV.A.iii.b. "'IV.i.A.b.' is the signature, but everything in quotes is the title"
 
   !!!! Note
-    It is highly recommended that the use of an available Fey plugin or extension to
-    your preferred text editor be used to automatically generate the correct heading
-    syntax. Such a plugin should increment the ordering of the relevant level of
-    heading for new headings, or update the ordering of all headings when a heading
-    is moved or deleted.
+  !!!! (notice this is a level 4 heading like the rest)
+    It is highly recommended that the use of an available Fey plugin or
+    extension to your preferred text editor be used to automatically generate
+    the correct heading syntax. Such a plugin should increment the ordering of
+    the relevant level of heading for new headings, or update the ordering of
+    all headings when a heading is moved or deleted.
 
     See link to fey.nvim above for neovim support.
 
@@ -243,42 +246,50 @@ Here are some examples of headings:
   IV.B. Lists
 
 Fey's ordered and unordered lists are as equally as expressive as headings,
-using the same '<token><delimiter>' segment to partially define itself. See
-seciton V.A.i. for more information on segments.
+using the same '<token><delimiter>' segment to partially define itself. 
+*See seciton IV.A.i. for more information on segments.*
 
 The second condition that defines a list is that the segment must be followed by
-a mix of two spaces or tabs before the body content/paragraph.
+a mix of two spaces or tabs before the body content/paragraph. This is what
+allows lists to be parsed as different from headings, and it also means that
+Lists may be indented any number of spaces, unlike other Fey syntactic objects
+like Blocks or Tags, etc, which cannot be indented two (2) spaces to be parsed
+correctly.
 
-Lists may be indented any number of spaces ex
+Lists are terminated by either two (2) empty newlines, or content on the
+following line that is indented at a lower level than its bullets.
 
 
-  IV.B.i. Unordered lists
+  IV.B.i. Unordered Lists
 
-Unordered lists are are the most simple, an use an anonymous segment which
-forgoes having a token:
+Unordered (or anonymous) Lists are are the most simple; they use an anonymous
+segment as their bullet which forgoes having a token:
 
     :  Each item in an unordered list is preceded by a character from a defined
        set, followed by a space.
 
-        :  the standard defined set is { * + - = . }
-    - The indentation of the start character determines the list level of the list item.
+       :  The indentation of the bullet determines the level of the list item.
 
 [Example]
 See the lists above and below this example.
 
 
-  IV.B.ii. Ordered lists
+  IV.B.ii. Ordered Lists
 
-Ordered lists are a bit more complex than unordered lists, but still follow a simple syntax:
+Ordered lists are only slightly more complex than unordered lists, since the are
+enumerated just like headings. This means they they can use one of the
+predefined ordered sets just like heading segments (or one defined by the user).
 
-    - Each item in an ordered list is preceded the '.' character, followed by an value from an
-        ordered set of characters (e.g. '1', 'a', 'A', 'i', 'I', '0x1', '0b1', etc.), followed by a space.
-    - Or alternatively the ordered character is followed by ':', followed by a space.
-    - The indentation of the '.' character determines the level of the list item.
-    - The indentation of the list item is determined by the number of spaces or tabs before the '.' character.
+    1)  Each item in an ordered list is preceded by an enumeration from one of
+        the ordered set of characters followed by two (2) spaces.
+        (e.g. '1', 'a', 'A', 'i', 'I', '0x1', '0b1', etc.)
 
-    - any changes between sets of ordered characters from one list item to the next is considered a new list.
-    - unless explicit ordering is maintained, such as 
+        1)  The indentation of the bullet determines the level of the list item
+
+    2)  The indentation of the list item is determined by the number of spaces or tabs before the '.' character.
+
+    3)  any changes between sets of ordered characters from one list item to the next is considered a new list.
+    4)  unless explicit ordering is maintained, such as 
 
 
 [Example]
@@ -624,76 +635,5 @@ the name of the tags inform the interpreter what language syntax highlighting to
 
 
 
-
-LIST EXAMPLES Exhaustive testing...
-
-:1. item 1
-:a. item 2
-
-:1. item 1
-:1.a. item 2
-
-
-:100. item 3
-:void. item 4
-
-
-
-1- item 1
-a- item 2
-iv- item 3
-b- item 4
-c- item 5
-i- item 6
-ii- item 7
-
-1+ item 1
-a+ item 2
-iv+ item 3
-b+ item 4
-c+ item 5
-i+ item 6
-ii+ item 7
-
-1* item 1
-a* item 2
-iv* item 3
-b* item 4
-c* item 5
-i* item 6
-ii* item 7
-
-1) item 1
-a) item 2
-iv) item 3
-b) item 4
-c) item 5
-i) item 6
-ii) item 7
-
-1: item 1
-a: item 2
-iv: item 3
-b: item 4
-c: item 5
-i: item 6
-ii: item 7
-
-1= item 1
-a= item 2
-iv= item 3
-b= item 4
-c= item 5
-i= item 6
-ii= item 7
-
-
-1- item 1
-a- item 2
-iv- item 3
-b- item 4
-c- item 5
-i- item 6
-ii- item 7
 
 
