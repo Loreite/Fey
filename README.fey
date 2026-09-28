@@ -1,6 +1,7 @@
 [#img ./images/fey_logo.png, 256, 256, alt: "Fey Logo", align: center #]
 
 
+  I. About
 
   ~~~
                                                                 ______
@@ -241,7 +242,7 @@ is available) where a heading is relative to its body content.
 Other than Lists, no other Fey syntactic objects may be indented two (2) spaces.
 
 
-***  Fey Heading Examples
+***  src Fey Heading Examples
   .... Anonymous heading
   ..i.. This is a partially anonymous heading
   I.1..i. This is also a partially anonymous heading
@@ -278,8 +279,11 @@ Lists may be indented any number of spaces, unlike other Fey syntactic objects
 like Blocks or Tags, etc, which cannot be indented two (2) spaces to be parsed
 correctly.
 
-Lists are terminated by either two (2) empty newlines, or content on the
-following line that is indented at a lower level than its bullets.
+Lists are terminated by either two (2) empty newlines, when content on the
+following line that is indented at a lower level than its bullets, or at the
+start of a new section because of a heading.
+
+Anonymous lists
 
 
   IV.B.i. Unordered Lists
@@ -293,7 +297,7 @@ segment as their bullet which forgoes having a token:
        :  The indentation of the bullet determines the level of the list item.
 
 
-###  Fey Unordered List Examples
+###  src Fey Unordered List Examples
   .  list level 1
      .  level 2
      -  same list new bullet type
@@ -327,11 +331,8 @@ predefined ordered sets just like heading segments (or one defined by the user).
 
     2)  The indentation of the list item is determined by the number of spaces or tabs before the '.' character.
 
-    3)  any changes between sets of ordered characters from one list item to the next is considered a new list.
-    4)  unless explicit ordering is maintained, such as 
 
-
-###  Fey Ordered List Example
+###  src Fey Ordered List Example
   1.  list level 1
       1.  level 2
       2-  same list new bullet type
@@ -351,42 +352,98 @@ predefined ordered sets just like heading segments (or one defined by the user).
 ###
 
 
+  IV.B.iii. Mixing List Types and Anonymous Text
+
+Lists actually follow a similar specification as Headings, except that where a
+Heading signature can have multiple segments, eg 'II.A.', bullets can only have
+one segment, but it can also be anonymous to create an unordered listitem, as we
+have seen.
+
+The bullets of lists and their sublists act much like the different segments of
+a heading, where each new depth of a sublist is akin to adding a new segment
+onto a heading. The only real difference then between a heading and a list is
+that lists are hierarchically defined by their indentation.
+
+Unordered listitems can be intermixed with ordered listitems, which has the same
+cumulative effect on the following listitems as anonymous segments in a heading
+does, ie. it skips it in the ordered count.
+
+For example, the following ordered list is compared to equivalent headings...
+
+
+###  src Fey Mixed List Example
+  I.  same as heading 'I.'
+      A.  same as heading 'I.A.'
+          i.  same as heading 'I.A.i.'
+          ii.  same as heading 'I.A.ii.'
+
+      .  anonymous heading does not affect ordering
+
+      B.  same as heading 'I.B.'
+          i.  same as heading 'I.B.i.'
+
+  II.  same as heading 'II.'
+      A.  same as heading 'II.A.'
+      .  etc...
+###
+
+
+And lastly, just like with heading segments, we can use anonymous text as part
+of our bullets (both ordered and unordered) to add some clarity and flexibility
+to our lists.
+
+
+###  src Fey Anonymous Text List Example
+  start_of_list_:  this is an unordered listitem
+
+  start_of_list_:  we can use the same anonymous text for each item
+
+  third_in_list_:  or change it up, depending on our needs
+
+    start_of_sublist_I:  This is an ordered listitem
+
+    second_of_sublist_:  We can still mix unordered items
+
+    third_of_sublist_II:  They keep counting when an enumeration is present
+###
+
+
   IV.C. Blocks
 
-The standard block is defined by an opening and closing fence, may have optional
-parameters and possibly contain inner content. The parameters list must come
-after a mix of two spaces or tabs. This helps the fey parser determine what is a
-fence and what is a heading signature.
+The standard Block is defined by an opening and closing fence, may have optional
+name followed by optional parameters, and possibly contain inner content. The
+parameters list must come after a mix of two spaces or tabs. This helps the fey
+parser determine what is a fence and what is a heading signature.
 
-If the block does contain inner content it does NOT respect the indentation of
-the text outside of the block. Indeed the content is indentation agnostic. It
+If the Block does contain inner content it does NOT respect the indentation of
+the text outside of the Block. Indeed the content is indentation agnostic. It
 only repsects itself, and what the optional parameters may specify.
 
-Currently, all Blocks are considered 'src' blocks, and the first parameter is
-used to name a filetype which will use an available treesitter parser to inject
-syntax highlighting. This will change in the future once the paramters list
-specification is more refined to allow the block to be used for other more
-complex features. The lack of a filetype name just means there is no syntax
-highlighting.
+Currently, only 'src' named Blocks intentionally supported, and the first
+parameter is used to name a filetype which will use an available treesitter
+parser to inject syntax highlighting. This will change in the future once the
+paramters list specification is more refined to allow the Block to be used for
+other more complex features. The lack of a name or filetype just means there is
+no syntax highlighting.
 
-Fey blocks do not contain each other, but, in the case of a Fey src block, the
-parser does correctly recognize blocks within itself, so long as either the
+Fey Blocks do not contain each other, but, in the case of a Fey src Block, the
+parser does correctly recognize Blocks within itself, so long as either the
 fences use a different character, a different length, or a deeper indentation
 level (min 1 column).
 
 
-###  Fey Nested Block Example
+###  src Fey Nested Block Example
   * heading etc...
 
-$$$  Fey Inner Block: Different Character
+$$$  src Fey Inner Block: Different Character
   * heading etc...
 
- $$$  Fey Inner-Inner Block: Different Indentation
+ $$$  src Fey Inner-Inner Block: Different Indentation
    * heading etc...
  $$$
 $$$
 
-#### Fey Inner Block: Different Length
+#### src Fey Inner Block: Different Length
   * heading etc..
 ####
 
@@ -395,8 +452,8 @@ $$$
 
   IV.C.i. Fences
 
-The opening and closing fences of a code block may appear at any indentation
-level, but they must match indentation for the block to parse correctly.
+The opening and closing fences of a Block may appear at any indentation
+level, but they must match indentation for the Block to parse correctly.
 
 Fences are nearly as flexible as Heading and List segments, they can be
 expressed using a wide list of character options.
@@ -437,6 +494,85 @@ a 16 bit integer to measure the width.
 
 
   IV.D. Tables
+
+Tables in Fey can be both incredibly simple or complex (in a good way) to best
+suit the needs of the user. 
+
+While they can be created manually by typing out each character or doing other
+text manipulation, it is recommended that for a Table to contain some of its
+more advanced features that you use the built in key mapped operations to
+maintain a consistently legible (and parseable) Table.
+
+
+  IV.D.i. A Simple Table anatomy
+
+All Tables in Fey must start with a plain row called the crown. The cells of the
+crown may contain content, but it does not support the more advanced table
+features because it serves an essential purpose for parsing Fey Tables: it
+determines how many physical columns there are.
+
+Most table operations automatically reformat the Table, but you can use the
+neovim convention `gqq` with the cursor inside of a Table to reformat it.
+
+
+###  src Fey Example Table
+
+This is a 3x3 Table, in order it has...
+
+1.  Crown Row with content
+2.  Table Section Separator (optional)
+3.  Plain Row with content
+4.  Plain Row without content
+
+| The   | Crown | Row     |
++=======+=======+=========+
+| Plain | Row   | Content |
+|       |       |         |
+###
+
+
+  IV.D.ii. Multi-line cells
+
+One thing about ascii-tables is that they can be notoriously difficult to use
+and maintain if the content in any cell of the table would be be too long to
+stay on the screen, and this compounds for every Table cell this is true for on
+the same row.
+
+This is why Fey Tables introduce the concept of the 'logical row' as a separate
+construct from the plain row we've already seen. Logical rows begin with a
+separating line called the 'cell boundary start'(CBS). This tells both the parser,
+and us the user that until we see the line called a 'cell boundary end' (CBE) keep
+treating all the plain rows we read as if they belong to the same logical row.
+
+Additionally, if we have multiple consecutive logical rows between the CBS/CBE,
+then we delineate them with a 'cell boundary inner'.
+
+Lets take a look at the anatomy of this now.
+
+
+###  src Fey Example Table
+
+This is also a 3x3 Table, in order it has...
+
+1.  Crow Row without content
+2.  Table Section Separator (optional)
+3.  Cell Boundary Start Separator
+
+4.  Logical Row (all cells in this row are multi-line cellsa;
+    1.  Plain row with content
+    2.  Plain row with content
+
+5.  Cell Boundary End Separator
+6.  Plain row without content
+
+|              |     |         |
++==============+=====+=========+
+v--------------v-----v---------v
+| Logical      | row | content |
+| cell content |     |         |
+^--------------^-----^---------^
+|              |     |         |
+###
 
 
   IV.E. Tags
