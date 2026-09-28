@@ -1,6 +1,7 @@
 [#img ./images/fey_logo.png, 256, 256, alt: "Fey Logo", align: center #]
 
 
+
   I. About
 
   ~~~
@@ -443,7 +444,7 @@ $$$  src Fey Inner Block: Different Character
  $$$
 $$$
 
-#### src Fey Inner Block: Different Length
+####  src Fey Inner Block: Different Length
   * heading etc..
 ####
 
@@ -573,6 +574,14 @@ v--------------v-----v---------v
 ^--------------^-----^---------^
 |              |     |         |
 ###
+
+
+  IV.D.iii. Horizontally Merged Cells
+
+
+
+  IV.D.iv. Vertically Merged Cells
+  IV.D.v. Putting it all together
 
 
   IV.E. Tags
