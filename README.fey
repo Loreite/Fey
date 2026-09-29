@@ -395,9 +395,9 @@ to our lists.
 
 
 ###  src Fey Anonymous Text List Example
-  start_of_list_:  this is an unordered listitem
+  Listitem_:  this is an unordered listitem
 
-  start_of_list_:  we can use the same anonymous text for each item
+  Listitem_:  we can use the same anonymous text for each item
 
   third_in_list_:  or change it up, depending on our needs
 
@@ -460,16 +460,16 @@ Fences are nearly as flexible as Heading and List segments, they can be
 expressed using a wide list of character options.
 
 Fences must be at least three (3) characters long, but there is no limit to how
-long they can be, except maybe a hard limit in the treesitter scanner which uses
-a 16 bit integer to measure the width.
+long they can be, except normal computing limits in the parser.
+
 
 | name       | begin | end |
 +============+=======+=====+
-| dash       | ---   | --- |
 | underscore | ___   | ___ |
+| dash       | ---   | --- |
 | tilde      | ~~~   | ~~~ |
-| plus       | +++   | +++ |
 | equal      | ===   | === |
+| plus       | +++   | +++ |
 +============+=======+=====+
 | bang       | !!!   | !!! |
 | intero     | ???   | ??? |
@@ -481,7 +481,7 @@ a 16 bit integer to measure the width.
 +============+=======+=====+
 | asterisk   | ***   | *** |
 | caret      | ^^^   | ^^^ |
-| backtick   | ```   | ``` |
+| grave      | ```   | ``` |
 | s-quote    | '''   | ''' |
 | d-quote    | """   | """ |
 +============+=======+=====+
@@ -520,15 +520,16 @@ neovim convention `gqq` with the cursor inside of a Table to reformat it.
 
 This is a 3x3 Table, in order it has...
 
-1.  Crown Row with content
-2.  Table Section Separator (optional)
-3.  Plain Row with content
-4.  Plain Row without content
+  1.  Crown Row with content
+  2.  Table Section Separator (optional)
+  3.  Plain Row with content
+  4.  Plain Row without content
 
-| The   | Crown | Row     |
-+=======+=======+=========+
-| Plain | Row   | Content |
-|       |       |         |
+
+  | The   | Crown | Row     |
+  +=======+=======+=========+
+  | Plain | Row   | Content |
+  |       |       |         |
 ###
 
 
@@ -546,7 +547,7 @@ and us the user that until we see the line called a 'cell boundary end' (CBE) ke
 treating all the plain rows we read as if they belong to the same logical row.
 
 Additionally, if we have multiple consecutive logical rows between the CBS/CBE,
-then we delineate them with a 'cell boundary inner'.
+then we delineate them with a 'cell boundary inner' (CBI).
 
 Lets take a look at the anatomy of this now.
 
@@ -555,36 +556,148 @@ Lets take a look at the anatomy of this now.
 
 This is also a 3x3 Table, in order it has...
 
-1.  Crow Row without content
-2.  Table Section Separator (optional)
-3.  Cell Boundary Start Separator
+  1.  Crown Row without content
+  2.  Table Section Separator (optional)
+  3.  Cell Boundary Start Separator
 
-4.  Logical Row (all cells in this row are multi-line cellsa;
-    1.  Plain row with content
-    2.  Plain row with content
+  4.  Logical Row (all cells in this row are multi-line cells)
+      1.  Plain row with content
+      2.  Plain row with content
 
-5.  Cell Boundary End Separator
-6.  Plain row without content
+  5.  Cell Boundary End Separator
+  6.  Plain row without content
 
-|              |     |         |
-+==============+=====+=========+
-v--------------v-----v---------v
-| Logical      | row | content |
-| cell content |     |         |
-^--------------^-----^---------^
-|              |     |         |
+
+  |              |     |         |
+  +==============+=====+=========+
+  v--------------v-----v---------v
+  | Logical      | row | content |
+  | cell content |     |         |
+  ^--------------^-----^---------^
+  |              |     |         |
 ###
 
 
   IV.D.iii. Horizontally Merged Cells
 
+Another thing about ascii-tables that is a challenge is needing to have data
+that spans multiple columns. It can be very limiting to only be able to export
+tables with this requirement using embedded HTML. Its not a bad option, but we
+end up losing the visual clarity that and ascii-table provides.
+
+Some languages like RST do offer this feature in their tables, but it often
+means giving up plain row data, because the parser requires that every row/cell of
+data is surrounded by an ascii-box. Thankfully, Fey's existing definition of a
+logical row for multi-line cells can be backpacked to support horizontally
+merged cells.
+
+To do so, we simply omit the centre beam ('|') between the two cells to be
+merged, and replace the 'v'/'+' on either the CBS/CBI repsectively with an
+asterisk ('*').
+
+The anatomy of this should look surprisingly simple for an otherwise complicated
+task to perform.
+
+
+###  src Fey Example Table
+
+This is also a 3x3 table, in order it has...
+
+  1.  Crown Row without content
+  2.  Cell Boundary Start Separator
+
+  3.  Logical Row (all cells in this row are multi-line cells)
+      1.  Plain row with content
+      2.  Plain row with content
+
+  4.  Cell Boundary End Separator
+  5.  Plain row without content
+
+
+  |       |       |         |
+  v-------*-------v---------v
+  | Merge Column  | content |
+  | cell content  |         |
+  ^-------^-------^---------^
+  |       |       |         |
+###
 
 
   IV.D.iv. Vertically Merged Cells
+
+Just like with horizontally merged cells, we face the same problem with
+vertically merged cells. We want it to be both clear to use as the viewer, as
+well as precise for the parser/exporter.
+
+Vertically merged cells might be even easier to manage too, since all we must do
+is omit the center separator ('~~~~~~~') between two cells in a column. The
+space where the separator would have been becomes and active line in the cell
+available for containing cell data.
+
+Let's take a look at the anatomy of this now.
+
+
+###  src Fey Example Table
+
+This is a 3x4 table, in order it has...
+
+  1.  Crown Row without content
+  2.  Cell Boundary Start Separator
+
+  3.  Logical Row (all cells in this row are multi-line cells
+      1.  Plain row with content
+
+  4.  Cell Boundary Inner Separator
+
+  5.  Logical Row (all cells in this row are multi-line cells
+     1.  Plain row without content
+
+  6.  Cell Boundary End Separator
+  7.  Plain row without content
+
+
+  |     |              |         |
+  v-----v--------------v---------v
+  | row | Merge Row    | content |
+  +~~~~~+ cell content +~~~~~~~~~+
+  |     |              |         |
+  ^-----^--------------^---------^
+  |     |              |         |
+###
+
+
   IV.D.v. Putting it all together
 
+By now I hope you've come to imagine that all these features of a Fey Table
+don't have to exist in isolation. In fact they will happily share a table
+together like in the example below!
 
-  IV.E. Tags
+Though I do hope you'll forgive me for not doing another breakdown of this more
+complex example
+
+
+###  src Fey Example Table
+
+| 0 | 1       | 2     | 3   | 4 | 5 | 6      | 7 |
+v---v---------*-------v-----v---v---v--------v---v
+| 1 | multi-          |     |   |   |        |   |
++~~~+ col             +~~~~~+~~~+~~~+~~~~~~~~+~~~+
+| 2 | & row           |     |   |   | multi- |   |
++~~~+~~~~~~~~~+~~~~~~~+~~~~~+~~~+~~~+ row    +~~~+
+| 3 |         |       |     |   |   |        |   |
+^---^---------^-------^-----^---^---^--------^---^
+| 4 | Plain   | row   |     |   |   |        |   |
+| 5 | Another | Plain | row |   |   |        |   |
+v---v---------*-------*-----*---v---v--------v---v
+| 6 | multi-col                 |   |        |   |
+^---^---------^-------^-----^---^---^--------^---^
+| 7 |         |       |     |   |   |        |   |
+###
+
+
+  V. Features Still In the Desing Process
+
+  V.A. Tags
 
 Tags in Fey are a versatile component of Fey's syntax used for either syntactic
 markup, structural markup, or data serialization.
@@ -616,7 +729,7 @@ type of tag it is.
 +================+=========+=========+=========+=========+
 
 
-  IV.E.i. Plain Tags
+  V.A.i. Plain Tags
 
 The plain tag contains no name or metadata. It is defined as just a pair of
 brackets, braces, parentheses, or chevrons with generic inner content that has no
@@ -627,7 +740,7 @@ Defining it this way allows Fey to refer back to text that is marked up this way
 easily as a 'plain tag' elsewhere in this documentation.
 
 
-  IV.E.ii. Line Tags
+  V.A.ii. Line Tags
 
 Line tags are non-nesting inline tags which consumes the text on the same line
 after itself as its body up to the next occurence of its token or optionally
@@ -644,7 +757,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more information on lists.
 
 
-  IV.E.iii. Block Tags
+  V.A.iii. Block Tags
 
 And then there is the nesting, whitespace indentation respecting tag such as
 '#[]' which consumes both the rest of the line after itself as its head, and the
@@ -660,7 +773,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more informiation on maps.
 
 
-  IV.E.iv. Paired Open/Close Tags
+  V.A.iv. Paired Open/Close Tags
 
 Finally, we have nestable paired tags which are like plain tags in that they
 only contain a name and metadata. They perform much like structural html or xml
@@ -734,7 +847,7 @@ paired tags, like so...
 [/html]
 '''
 
-  IV.F. Superscripts and Subscripts
+  V.B. Superscripts and Subscripts
 
 To indicate superscripts, we can use '^' (caret) between the single 'carrier'
 word or number and the superscript text or 'load'. If the carrier or load
@@ -775,7 +888,7 @@ In the fey.nvim plugin for example we have:
     -  FeyPrettySubSuperscriptOff
 
 
-  IV.G. Emphasis
+  V.C. Emphasis
 
 | emphasis      | clr, hl    | style     |
 +===============+============+===========+
@@ -833,7 +946,7 @@ In the fey.nvim plugin for example we have:
 +===============+============+===========+
 
 
-  IV.H. Data Serialization
+  V.D. Data Serialization
 
 For data serialization in Fey, we use two specifc data structurs, the list ':'
 and the map '#'. These tags can be plain anonymous data, or have their own
@@ -841,7 +954,7 @@ name and metadata associated with them. eg. '[name| key value ...]'
 
 
 
-  IV.I. Actions
+  V.E. Actions
 
 |            |   |   |
 +============+===+===+
