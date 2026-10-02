@@ -1,4 +1,5 @@
-[#img ./images/fey_logo.png, 256, 256, alt: "Fey Logo", align: center #]
+
+
 
 
 
@@ -710,23 +711,27 @@ can contain Line tags and Open/Close pairs, and Open/Close Pairs can contain
 Line and Block tags. They all also contain at a minimum a 'name' and optionally
 a list of 'metadata'.
 
-The name can be any single word using these characters [a-zA-Z_-].
+The name can be any single word using these characters [a-zA-Z0-9_-].
 
-The metadata takes the form of a list of 'key: value' or 'key: "value with
-spaces"' pairs separated by a ',' (comma).
+The metadata takes the form of first: an optional ordered list of `value` or 
+`"value with sapces"`, followed by second: an optional unordered list of
+`key: value` or `key: "value with spaces"` pairs, all of which are separated by
+a ',' (comma).
 
-The symbol (referred to as a tag's 'token') used to denote a Line/Block/Open/Close
-tag can be any from the set [# @ & $ % : . / \ ? !]. In the table below we use
-'#' (hash) as an example to show how the position of this token defines what
-type of tag it is.
+The symbol (referred to as a tag's 'token') used to denote a
+Line/Block/Open/Close tag can be any from the defined set below. In the table
+below we use '#' (hash) as an example to show how the position of this token
+defines what type of tag it is.
 
-| Plain          | Line    | Block   | Open    | Close   |
-+================+=========+=========+=========+=========+
-| [generic text] | #[name] | [name]# | [name#] | [#name] |
-| {generic text} | #{name} | {name}# | {name#} | {#name} |
-| (generic text) | #(name) | (name)# | (name#) | (#name) |
-| <generic text> | #<name> | <name># | <name#> | <#name> |
-+================+=========+=========+=========+=========+
+  token_set_:  . , : ; ! ? \ / - + * = ~ ^ @ # $ & %
+
+| Plain          | Simple     | Line      | Block     | Open     | Close    |
++================+============+===========+===========+==========+==========+
+| [generic text] | [# name #] | #[ name ] | [ name ]# | [name #] | [# name] |
+| {generic text} | {# name #} | #{ name } | { name }# | {name #} | {# name} |
+| (generic text) | (# name #) | #( name ) | ( name )# | (name #) | (# name) |
+| <generic text> | <# name #> | #< name > | < name ># | <name #> | <# name> |
++================+============+===========+===========+==========+==========+
 
 
   V.A.i. Plain Tags
@@ -740,7 +745,13 @@ Defining it this way allows Fey to refer back to text that is marked up this way
 easily as a 'plain tag' elsewhere in this documentation.
 
 
-  V.A.ii. Line Tags
+  V.A.ii. Simple Tags
+
+Simple Tags are called so because they are self contained. They begin and end
+themselves, and they don't have any head or body to be concerned with. What they
+do offer is the standard list of metatdata
+
+  V.A.iii. Line Tags
 
 Line tags are non-nesting inline tags which consumes the text on the same line
 after itself as its body up to the next occurence of its token or optionally
@@ -757,7 +768,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more information on lists.
 
 
-  V.A.iii. Block Tags
+  V.A.iv. Block Tags
 
 And then there is the nesting, whitespace indentation respecting tag such as
 '#[]' which consumes both the rest of the line after itself as its head, and the
@@ -773,7 +784,7 @@ Like with plain tags, the tag itself may span multiple lines.
 See [ Data Serialization ] below for more informiation on maps.
 
 
-  V.A.iv. Paired Open/Close Tags
+  V.A.v. Paired Open/Close Tags
 
 Finally, we have nestable paired tags which are like plain tags in that they
 only contain a name and metadata. They perform much like structural html or xml
@@ -847,7 +858,7 @@ paired tags, like so...
 [/html]
 '''
 
-  V.B. Superscripts and Subscripts
+  V.B. Superscriphttps://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1ts and Subscripts
 
 To indicate superscripts, we can use '^' (caret) between the single 'carrier'
 word or number and the superscript text or 'load'. If the carrier or load
@@ -867,7 +878,7 @@ carrier_load 9.5_4 {10_000_000}_(the moon)
 
 Six settings are available to set whether Plain tags are required when using a
 live renderer, on export to a staic format, or used by an editor to show pretty
-wysiwyg text such as in neovim. When they are true, Plain tags are optional;
+wysiwyg text such https://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1as in neovim. When they are true, Plain tags are optional;
 when they are false, Plain tags are required. By default they are all true.
 
     -  fey-render-subscripts
