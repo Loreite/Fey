@@ -76,7 +76,7 @@ tell it how to interpret new Fey commands (and possibly syntax) that are defined
 by the user. This should allow for the language to appear different to different
 users, while still adhering to the same specification for a Fey interpreter.
 
-This is where Fey gets its name from. In folklore and fantasy, a fey creature is
+This is where Fey gets its name from. In folklore and fantasy, a Fey creature is
 one that contains powerful magic, and is often unpredictable.
 
 In the same way, Fey should be able to be reshaped and redefined by its users,
@@ -90,19 +90,19 @@ langauge.
 
   I.B. First steps
 
-The current milestone goal is to expressly define the core syntax for fey to be
+The current milestone goal is to expressly define the core syntax for Fey to be
 used in places where Markdown or Org-mode are currently, such as for README
 documentation, writing articles for static site generation, or taking notes for
 a PKM where the data in the notes is readily indexable for searching and
 management.
 
 In conjunction with that goal, a neovim plugin is being developed to make
-editing fey files seamless, with features that are comparable to org-mode when
+editing Fey files seamless, with features that are comparable to org-mode when
 it comes to editing notes, such as moving heading subtrees up/down etc.
 
 [url] https://github.com/Loreite/fey.nvim [Fey Markup Language Neovim Plugin]
 
-Though do no expect for a very long time (if ever) that fey will have feature
+Though do no expect for a very long time (if ever) that Fey will have feature
 parity when it comes to org-mode features like agenda and task tracking, unless
 it becomes a clear point of interest for myself or large portion of the
 community of users. If those features are currently important and/or
@@ -131,7 +131,7 @@ on YAML frontmatter (a not so terrible solution) for example.
 What Fey proposes to do is determine all the ground that has been lost to those
 other languages and cover it explicitly while also filling the same roles they
 are currently fit for. With everchanging needs in mind this is the reason for
-Fey's goal for extensibility, to allow users to define their needs and adapt fey
+Fey's goal for extensibility, to allow users to define their needs and adapt Fey
 to meet them where they are, if that goal is as possible as we imagine it to be.
 
 
@@ -162,7 +162,7 @@ We generally call these features Fey 'objects' or 'Constructs' interchangeably.
   IV.A.i. Segments, Tokens, Ordered Sets
 
 You've already been reading the syntax for headings, but the formal definition
-is that fey uses a '<token><delimiter>' (called a segment) notation for each
+is that Fey uses a '<token><delimiter>' (called a segment) notation for each
 level of heading. Where 'token' is a string of characters that match this
 pattern /[a-zA-Z0-9_]*/.
 
@@ -170,8 +170,8 @@ Furthermore the token itself is broken up into two parts using this pattern
 /([a-zA-Z0-9_]*_)([a-zA-Z0-9]*)/.
 
 If you're unfamiliar with regex, then what this means is that we get two pattern
-groups $1 and $2, where $1 looks something like '_' or 'word1_' or 'word1_word2_' etc, and
-group $2 simply looks something like '1word'.
+groups $1 and $2, where $1 looks something like '_' or 'word1_' or
+'word1_word2_' etc, and group $2 simply looks something like '1word'.
 
 Put another way, $1 is called the 'anonymous text', and $2 is called the
 'enumeration'. The enumeration is the part of the segment that will be
@@ -209,7 +209,7 @@ found at that depth on the page. Plugins should also be configurable to make
 them only order at that depth for a given subtree.
 
 This means that the first index value of any ordered set must be unique in order
-to be properly distinguised by the fey interpreter.
+to be properly distinguised by the Fey interpreter.
 
 (It is also possible to undefine an ordered set in order to free up a character)
 
@@ -241,7 +241,21 @@ text that begin like 'endofasentence. new sentence'. It also creates a clear
 visual distinction for a reader of the plain text (when no syntax highlighting
 is available) where a heading is relative to its body content.
 
-Other than Lists, no other Fey syntactic objects may be indented two (2) spaces.
+[ callout ]#  NOTE...
+    For all Fey documents, the first Heading determines the starting left margin
+    of indentation. This equals the indentation of the signature minus two (2).
+
+    In practice for a Fey document, it means that if a Block Tag or List
+    comes before the first Heading, then it will not be terminated by the
+    Heading and instead swallow it, though they will still be ended by their
+    other means.
+
+    The reason for this is to allow proper indentation in fenced raw text
+    Blocks, which when targeting Fey source. Writing the parser this way means
+    that Fey has a quirk, but the behaviour is consistent and reliable.
+
+#[ comment ]  TODO: check the verity of this after finishing all the indent expressions
+Other than Lists, Fences, and Tags, no other Fey syntactic objects may be indented two (2) spaces.
 
 
 ***  src Fey Heading Examples
@@ -255,6 +269,8 @@ Other than Lists, no other Fey syntactic objects may be indented two (2) spaces.
   ###Example_iv: the token enumeration updates, but the anonymous text doesn't
                 you can se how this would be useful for enumerating headings
                 related to a specific topic
+
+  this_?is_?still_?anonymous_? An All Anonymous Text Signature 
 
   !!!! Note
   !!!! (notice this is a level 4 heading like the rest)
@@ -414,7 +430,7 @@ to our lists.
 
 The standard Block is defined by an opening and closing fence, may have optional
 name followed by optional parameters, and possibly contain inner content. The
-parameters list must come after a mix of two spaces or tabs. This helps the fey
+parameters list must come after a mix of two spaces or tabs. This helps the Fey
 parser determine what is a fence and what is a heading signature.
 
 If the Block does contain inner content it does NOT respect the indentation of
@@ -518,7 +534,6 @@ neovim convention `gqq` with the cursor inside of a Table to reformat it.
 
 
 ###  src Fey Example Table
-
 This is a 3x3 Table, in order it has...
 
   1.  Crown Row with content
@@ -554,7 +569,6 @@ Lets take a look at the anatomy of this now.
 
 
 ###  src Fey Example Table
-
 This is also a 3x3 Table, in order it has...
 
   1.  Crown Row without content
@@ -601,7 +615,6 @@ task to perform.
 
 
 ###  src Fey Example Table
-
 This is also a 3x3 table, in order it has...
 
   1.  Crown Row without content
@@ -639,7 +652,6 @@ Let's take a look at the anatomy of this now.
 
 
 ###  src Fey Example Table
-
 This is a 3x4 table, in order it has...
 
   1.  Crown Row without content
@@ -678,7 +690,6 @@ complex example
 
 
 ###  src Fey Example Table
-
 | 0 | 1       | 2     | 3   | 4 | 5 | 6      | 7 |
 v---v---------*-------v-----v---v---v--------v---v
 | 1 | multi-          |     |   |   |        |   |
@@ -696,9 +707,7 @@ v---v---------*-------*-----*---v---v--------v---v
 ###
 
 
-  V. Features Still In the Design Process
-
-  V.A. Tags
+  V. Tags
 
 Tags in Fey are a versatile component of Fey's syntax used for either syntactic
 markup, structural markup, or data serialization.
@@ -706,159 +715,246 @@ markup, structural markup, or data serialization.
 All the pairs of '[], {}, (), <>' are considered the same interchangeable
 syntactic unit in accordance with Fey's core thesis about user visual preference.
 
-Line, Block, or paired Open/Close tags can be intermixed. That is, Block tags
-can contain Line tags and Open/Close pairs, and Open/Close Pairs can contain
-Line and Block tags. They all also contain at a minimum a 'name' and optionally
-a list of 'metadata'.
+Scope, Line, Block, or Paired open/close Tags can be intermixed. That is, Block
+Tags can contain Line and Paired Tags, and Paired Tags can contain Line and
+Block Tags. Line, Block, and Paired Tags can also all contain Scope Tags.
 
-The name can be any single word using these characters [a-zA-Z0-9_-].
 
-The metadata takes the form of first: an optional ordered list of `value` or 
-`"value with sapces"`, followed by second: an optional unordered list of
-`key: value` or `key: "value with spaces"` pairs, all of which are separated by
-a ',' (comma).
+  V.A. Tag Heads
 
-The symbol (referred to as a tag's 'token') used to denote a
-Line/Block/Open/Close tag can be any from the defined set below. In the table
-below we use '#' (hash) as an example to show how the position of this token
-defines what type of tag it is.
+The anatomy of a Tag begins with its head, and optional body. All Tags' heads
+also contain at a minimum a 'name', and optionally a list of 'metadata'.
+
+The name is any single word following this pattern: /[a-zA-Z_][a-zA-Z0-9_-]*/
+
+[ callout ]#  Note...
+    The format of the body is implied by the name of the Tag and the handler
+    associated with it. Thus, beyond the Tags that Fey itself defines, there is
+    no set action for a Tag to apply unless it has an attached handler.
+
+The metadata takes the form of a list of simple `value` or `key: value` pairs,
+all of which are separated by a ',' (comma) or ';' (semicolon) delimiter. A
+comma, means the next data item in the list is a simple value, and a semicolon
+means the next item is a key-value pair. The first delimiter must  appear after
+the name to start the sequence. The last value in the list can end with an
+optional delimiter to make writing metadata lists across multiple lines easier.
+
+[ callout ]#  Note...
+    While the head itself may span multiple lines, it is not indentation
+    agnostic and will end a List or Block Tag if any of the lines it spans are
+    indented at a shallower depth than they are.
+
+The `key` in key-value pairs follows the same naming rules as the Tag name.
+
+The symbol (referred to as a Tag's 'token') used to denote a Scope, Line,
+Block, or Paired Tag can be any from the defined set below. In the table below
+we use '#' (hash) as an example to show how the position of this token defines
+what type of Tag it is.
 
   token_set_:  . , : ; ! ? \ / - + * = ~ ^ @ # $ & %
 
-| Plain          | Simple     | Line      | Block     | Open     | Close    |
-+================+============+===========+===========+==========+==========+
-| [generic text] | [# name #] | #[ name ] | [ name ]# | [name #] | [# name] |
-| {generic text} | {# name #} | #{ name } | { name }# | {name #} | {# name} |
-| (generic text) | (# name #) | #( name ) | ( name )# | (name #) | (# name) |
-| <generic text> | <# name #> | #< name > | < name ># | <name #> | <# name> |
-+================+============+===========+===========+==========+==========+
+| Plain          | Scope     | Line      | Block     | Pair Open | Pair Close |
++================+============+===========+===========+===========+============+
+| [generic text] | [# name #] | #[ name ] | [ name ]# | [ name #] | [\# name ] |
+| {generic text} | {# name #} | #{ name } | { name }# | { name #} | {\# name } |
+| (generic text) | (# name #) | #( name ) | ( name )# | ( name #) | (\# name ) |
+| <generic text> | <# name #> | #< name > | < name ># | < name #> | <\# name > |
++================+============+===========+===========+===========+============+
+
+Notice that the name and metatdata must be set off from the Tag head start and
+end by one space, this helps the parser differentiate betwee `[ name \#]` and
+[name], which may look different to me or you, but not to the parser.
+
+[ callout ]#  Note..
+    The Tag head itself is not included on document export, it is treated as an
+    invisible, zero-width unit. Only the body will be part of the export, unless
+    it has been commented out.
+
+    The head also cannot nest other Tags, though you may write their shape into
+    one of the values, this may cause parse errors unless it is escaped
+    (see example below).
 
 
-  V.A.i. Plain Tags
+###  src Fey Example Tag Head
+{# tag_name, value words; key: value, another value #}
+{# tag_name; key: value words, value; another_key: another value #}
 
-The plain tag contains no name or metadata. It is defined as just a pair of
+{# tag_name,
+   some value like 1,
+   another value like 2,
+   another value like 4,
+   value to be reordered 3,
+   [@ this_is_not_a_tag, it does not need escapes @],
+   {# comment, this is not a real comment tag\, it just looks like one \#},
+#}
+###
+
+
+  V.B. Tag Types
+
+  V.B.i. Plain Tags
+
+The plain Tag contains no name or metadata. It is defined as just a pair of
 brackets, braces, parentheses, or chevrons with generic inner content that has no
 set structure. This makes it available for parentheticals in paragraph text, or
 to be used as part of other syntactic structures (see super-/sub-scripts).
 
 Defining it this way allows Fey to refer back to text that is marked up this way
-easily as a 'plain tag' elsewhere in this documentation.
+easily as a 'plain Tag' elsewhere in this documentation. It otherwise has no
+special meaning.
 
 
-  V.A.ii. Simple Tags
+  V.B.ii. Scope Tags
 
-Simple Tags are called so because they are self contained. They begin and end
-themselves, and they don't have any head or body to be concerned with. What they
-do offer is the standard list of metatdata
+Scope Tags are called so because they are self contained. They begin and end
+themselves, and they don't have a particular body that follows. Instead what they
+do in addition to containing standard head features, is operate on the implied
+body, which is the containing parent Fey object, such as a paragraph, listitem,
+section, etc. However, whether the Tag actually applies itself to the implied
+body depends on the Tag's handler.
 
-  V.A.iii. Line Tags
 
-Line tags are non-nesting inline tags which consumes the text on the same line
+###  src Fey Scope Tag Example
+-  This list item is not commented out
+-  This list item is commented out
+   {# comment #}
+
+
+-  Tags that are the only object of a listitem apply to the whole list
+-  {# comment #}
+-  So this whole list is commented out
+
+
+[ name ]#  this whole block Tag content is commented out
+  {# comment #}
+
+
+  # This entire Section is commented out
+{# comment #}
+###
+
+
+  V.B.iii. Line Tags
+
+Line Tags are non-nesting inline Tags which consumes the text on the same line
 after itself as its body up to the next occurence of its token or optionally
 until the end of the line.
 
-'''
-Non body text #[name key: value, ...] body text# non-body text
-Non body text #[name key: value, ...] body text until end of line
-'''
 
-The expcted format of the body text is defined by the name, eg. list or map.
+  V.B.iii.a. Limited Line Tag
 
-Like with plain tags, the tag itself may span multiple lines.
-See [ Data Serialization ] below for more information on lists.
+The limited Line Tag consumes all text until the next Tag's token following the
+tag itself. If the body of the tag must contain the Tag's token itself, it can be
+escaped with the '\' character.
 
 
-  V.A.iv. Block Tags
-
-And then there is the nesting, whitespace indentation respecting tag such as
-'#[]' which consumes both the rest of the line after itself as its head, and the
-following lines of content which all begin at the next level of indentation as
-its body, like so...
-'''
-[name key: value, ...]# head...
-    body...
-'''
-where the expected head and body format are defined by the initial symbol, ie.
-'#' which expects a map.
-Like with plain tags, the tag itself may span multiple lines.
-See [ Data Serialization ] below for more informiation on maps.
+###  src Fey Limited Line Tag Example
+outside tag text #[ name ]  body...# outside tag text
+outside tag text #[ name ]  body with \#... # outside tag text
+###
 
 
-  V.A.v. Paired Open/Close Tags
+  V.B.iii.b. Unlimited Line Tag
 
-Finally, we have nestable paired tags which are like plain tags in that they
-only contain a name and metadata. They perform much like structural html or xml
-tags, but the symbol used to define them determines what is expected in the body
-which is all the content between each tag, and does not respect whitespace.
+The unlimited Line Tag consumes all text until the end of the current line. This
+makes it quick and easy to deploy for commening out the rest of a line, etc.
 
-This adaptation allows fey to be easily translated into html, without needing to
+
+###  src Fey Unlimited Line Tag Example
+outside tag text #[ name ]  body to the end of the line...
+###
+
+
+  V.B.iv. Block Tags
+
+Block Tags are the nesting, whitespace-indentation respecting Tag which
+consumes as its body both the rest of the line after itself and the following
+lines of content which must all begin at the next level of indentation
+minumum one (1) column.
+
+Any Fey object which begins at an indentation level shallower than the Block Tag
+head will close the tags body ending at the line preceding the object.
+
+Two newlines or the start of a new section will also close a Block Tag Body.
+
+###  src Fey Block Tag Example
+  # [see note in {@ section, IV.A.iii. @} about why this heading is necessary]
+
+[ name ]#  body...
+    more body...
+
+not body because of shallow indentation
+
+[ name ]#  body...
+    more body...
+
+
+    not body because of two newlines
+
+[ name ]#  body...
+    more body...
+  * new section ends body
+###
+
+
+
+  V.B.v. Paired Open/Close Tags
+
+Paired Tags perform much like structural html or xml tags. They have an Open
+and a Close component which makes up a disjointed head, and the body is all the
+content between them.
+
+The body of Paired Tags is agnostic of the whitespace indentation of parent
+listitem bodies or Block Tag bodies. The Paired Tags as a sort of temporary
+loophole for indentation because after it closes, the indentation rules resume
+as normal until the containing indentation-based body would normally close.
+
+This Tag form allows Fey to be easily translated into html, without needing to
 support html embedding, as what would be html can be written directly using
-paired tags, like so...
+paired Tags (and other tag forms), like so...
 
-'''
-[html/ lang: "en"]
-[head/]
-    [title/]Home[/title]
-    [meta/ charset: "utf-8"]
-    [style/]
-        body {
-            margin: 0%;
-            padding: 0%;
-            background-color: #221a0f;
-        }
-        hr {
-            color: #ebc295;
-        }
-        .root {
-            display: flex;
-            flex-flow: row wrap;
-            min-height: 100vh;
-        }
-    [/style]
-[/head]
-[body/]
-    [header/]
-    [/header]
-    [div/ class: "root"]
-        [div/ class: "menu"]
-            [ul/]
-                [li/][a/ href: "index.html"]
-                        [h3/]Home[/h3]
-                    [/a][/li]
-                [li/][a/ href: "pages/character.html"]
-                        [h3/]Character Sketch[/h3]
-                    [/a][/li]
-            [/ul]
-        [/div]
-        [div/ class: "page"]
-            [div/ class: "content"]
-                [div/ class: "text-content"]
-                    [h1/]Home[/h1]
-                    [h2/]Welcome[/h2]
-                    [p/]
-                        Neque, nisi vitae dapibus magna, suscipit eget sed parturient sit. Condimentum
-                        nunc non molestie sed aliquam ac sed imperdiet ac. Eget, mi at tellus facilisis
-                        tincidunt laoreet nam. Pulvinar risus habitasse varius pulvinar nec vivamus
-                        imperdiet nulla bibendum. Eget ornare vivamus, porttitor porta non ante dui
-                        lacus porttitor.
-                    [/p]
-                [/div]
-                [div/ class: "footer"]
-                    [img| src: "images/some-image.png",
-                        height: "740", width: "580",
-                        alt: "Nullam aenean, etiam imperdiet imperdiet velit.",
-                        style: "display:block; margin-left:auto; margin-right:auto;"]
-                    [hr/]
-                    [p/]Copyright (c) 2025 Aldo Zeroun[/p]
-                [/div]
-            [/div]
-        [/div]
-    [/div]
-[/body]
-[/html]
-'''
 
-  V.B. Superscriphttps://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1ts and Subscripts
+###  src Fey Paired Tag Example
+  * 
+[ html; lang: "en" /]
+[ head /]
+  [ title /]Home[/ title ]
+  [ meta; charset: "utf-8" /]
+  [ style /]
+      body { background-color: #221a0f; }
+  [/ style ]
+[/ head ]
+[ body /]
+  [ div; class: "page" /]
+    [ div; class: "text-content" /]
+      /[ h1 ]  Home
+      /[ h2 ]  Welcome
+      [ p ]/
+        Neque, nisi vitae dapibus magna, suscipit eget sed parturient sit. Condimentum
+        nunc non molestie sed aliquam ac sed imperdiet ac. Eget, mi at tellus facilisis
+        tincidunt laoreet nam. Pulvinar risus habitasse varius pulvinar nec vivamus
+        imperdiet nulla bibendum. Eget ornare vivamus, porttitor porta non ante dui
+        lacus porttitor.
+    [/ div ]
+    [ div; class: "footer" /]
+      [/ img;
+         src: "images/some-image.png";
+         height: "740"; width: "580";
+         alt: "Nullam aenean\, etiam imperdiet imperdiet velit";
+         style: "display:block\; margin-left:auto\; margin-right:auto\;"
+      /]
+      [/ hr /]
+      /[ p ]  Copyright (c) 2025 Aldo Zeroun
+    [/ div ]
+  [/ div ]
+[/ body ]
+[/ html ]
+###
+
+
+  . Features Still In the Design Process
+
+  VI. Superscripts and Subscripts
 
 To indicate superscripts, we can use '^' (caret) between the single 'carrier'
 word or number and the superscript text or 'load'. If the carrier or load
@@ -867,7 +963,7 @@ words, numbers, or symbols, either side can be surrounded by a Plain Tag (see
 Plain Tags) to remove ambiguity.
 
 Similarly, subscripts use a '_' (underscore) between the single carrier and the
-load. Plain tags can again be used to remove ambiguity if there are underscores
+load. Plain Tags can again be used to remove ambiguity if there are underscores
 in the carrier or load, or the load contains multiple space delimited words,
 numbers, or symbols.
 
@@ -876,10 +972,10 @@ carrier^load 9.5^4 {10_000_000}^(the moon)
 carrier_load 9.5_4 {10_000_000}_(the moon)
 '''
 
-Six settings are available to set whether Plain tags are required when using a
+Six settings are available to set whether Plain Tags are required when using a
 live renderer, on export to a staic format, or used by an editor to show pretty
-wysiwyg text such https://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1as in neovim. When they are true, Plain tags are optional;
-when they are false, Plain tags are required. By default they are all true.
+wysiwyg text such https://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1as in neovim. When they are true, Plain Tags are optional;
+when they are false, Plain Tags are required. By default they are all true.
 
     -  fey-render-subscripts
     -  fey-export-subscripts
@@ -899,7 +995,7 @@ In the fey.nvim plugin for example we have:
     -  FeyPrettySubSuperscriptOff
 
 
-  V.C. Emphasis
+  VII. Emphasis
 
 | emphasis      | clr, hl    | style     |
 +===============+============+===========+
@@ -957,15 +1053,15 @@ In the fey.nvim plugin for example we have:
 +===============+============+===========+
 
 
-  V.D. Data Serialization
+  VIII. Data Serialization
 
 For data serialization in Fey, we use two specifc data structurs, the list ':'
-and the map '#'. These tags can be plain anonymous data, or have their own
+and the map '#'. These Tags can be plain anonymous data, or have their own
 name and metadata associated with them. eg. '[name| key value ...]'
 
 
 
-  V.E. Actions
+  IX. Actions
 
 |            |   |   |
 +============+===+===+
@@ -980,34 +1076,19 @@ name and metadata associated with them. eg. '[name| key value ...]'
 | <<<this>>> |   |   |
 +============+===+===+
 
-$$$  misc
-the general idea is that a tag can be one of the following things:
-- anonymous tag: `[]`
-- anonymous tag with subject: `[: subject]` or `[: some subject]`
-- named tag: `[tagname]` or `[tag name]`
-- named tag with subject: `[tagname: subject]` or `[tag name: some subject]` etc.
 
+$$$  src Fey misc ideas
+-  heading linking
+   cannot be anonymous (for now at least it is undefined) the name should be the
+   filename of the document the heading is in
+   -  '[]#' - for internal links
+   -  '#[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
 
-additionally, tags can be given properties based on the group of characters which immediate preced or immediately follow the tag
-- heading linking
-cannot be anonymous (for now at least it is undefined)
-the name should be the filename of the document the heading is in
-    - '[]#' - for internal links
-    - '#[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
-- tag linking
-cannot be anonymous (for now at least it is undefined)
-the name/subject of the link tag must match exactly the name/subject of the tag it is linking to.
-- '[]@' - for internal links
-- '@[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
-- Monospaced text block
-the name of the tags should either match, or the closing tag can be anonymous.
-the name of the tags inform the interpreter what language syntax highlighting to use, ie. 'zig', 'c', 'python', etc.
-    - '[]{' open monospaced text block
-    - '}[]' close monospaced text block
-
-- Line-wise tags
-- '[]:' - all of the content up to the next newline is considered the body of the tag
-- ':[]' - all of the content preceding the tag on the current line is considered the body of the tag
+-  Tag linking
+   cannot be anonymous (for now at least it is undefined)
+   the name/subject of the link Tag must match exactly the name/subject of the Tag it is linking to.
+   -  '[]@' - for internal links
+   -  '@[]' - for external links (experimental. will only look in lateral directories or their subdirectories)
 $$$
 
 
