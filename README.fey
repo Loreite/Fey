@@ -715,15 +715,17 @@ markup, structural markup, or data serialization.
 All the pairs of '[], {}, (), <>' are considered the same interchangeable
 syntactic unit in accordance with Fey's core thesis about user visual preference.
 
-Scope, Line, Block, or Paired open/close Tags can be intermixed. That is, Block
-Tags can contain Line and Paired Tags, and Paired Tags can contain Line and
-Block Tags. Line, Block, and Paired Tags can also all contain Scope Tags.
+Scope, Line, Block, or Paired open/close Tags can be intermixed. Check out their
+individual description about whhich tags can contain which others.
 
 
   V.A. Tag Heads
 
 The anatomy of a Tag begins with its head, and optional body. All Tags' heads
 also contain at a minimum a 'name', and optionally a list of 'metadata'.
+
+For Block and Line Tags the body begins two spaces after the end of the head.
+Paired tags do not have this requirement.
 
 The name is any single word following this pattern: /[a-zA-Z_][a-zA-Z0-9_-]*/
 
@@ -813,6 +815,8 @@ body, which is the containing parent Fey object, such as a paragraph, listitem,
 section, etc. However, whether the Tag actually applies itself to the implied
 body depends on the Tag's handler.
 
+Cannot contain other tags, as it does not havea a direct body.
+
 
 ###  src Fey Scope Tag Example
 -  This list item is not commented out
@@ -840,6 +844,8 @@ Line Tags are non-nesting inline Tags which consumes the text on the same line
 after itself as its body up to the next occurence of its token or optionally
 until the end of the line.
 
+Can contain Line and Scope Tags.
+
 
   V.B.iii.a. Limited Line Tag
 
@@ -850,7 +856,8 @@ escaped with the '\' character.
 
 ###  src Fey Limited Line Tag Example
 outside tag text #[ name ]  body...# outside tag text
-outside tag text #[ name ]  body with \#... # outside tag text
+outside tag text #[ name ]  body with \# ... # outside tag text
+#[ outer ]  outer body #[ inner ]  inner body # outer body  # outside tag text
 ###
 
 
@@ -876,6 +883,9 @@ Any Fey object which begins at an indentation level shallower than the Block Tag
 head will close the tags body ending at the line preceding the object.
 
 Two newlines or the start of a new section will also close a Block Tag Body.
+
+Can contain Block, Paired, Line, and Scope Tags.
+
 
 ###  src Fey Block Tag Example
   # [see note in {@ section, IV.A.iii. @} about why this heading is necessary]
@@ -913,6 +923,7 @@ This Tag form allows Fey to be easily translated into html, without needing to
 support html embedding, as what would be html can be written directly using
 paired Tags (and other tag forms), like so...
 
+Can contain Paired, Block, Line, and Scope Tags. 
 
 ###  src Fey Paired Tag Example
   * 
