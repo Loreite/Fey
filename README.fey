@@ -945,7 +945,8 @@ Can contain Paired, Block, Line, and Scope Tags.
         nunc non molestie sed aliquam ac sed imperdiet ac. Eget, mi at tellus facilisis
         tincidunt laoreet nam. Pulvinar risus habitasse varius pulvinar nec vivamus
         imperdiet nulla bibendum. Eget ornare vivamus, porttitor porta non ante dui
-        lacus porttitor.
+        lacus porttitor. {# comment #}
+      ll
     [/ div ]
     [ div; class: "footer" /]
       [/ img;
@@ -1006,6 +1007,11 @@ In the fey.nvim plugin for example we have:
     -  FeyPrettySubSuperscriptOff
 
 
+###  src mermaid: export
+  
+###
+
+
   VI. Emphasis
 
 | emphasis      | clr, hl    | style     |
@@ -1064,47 +1070,231 @@ In the fey.nvim plugin for example we have:
 
   VII. Data Serialization
 
-For data serialization in Fey, we use two specifc data structurs, the list `:`
-and the map `#`. These Tags can be plain anonymous data, or have their own
-name and metadata associated with them. eg. `[name| key value ...]`
+A Fey document can carry data the way a JSON, TOML or YAML file does, with
+prose around it if you like. A Fey data exporter reads the data and ignores
+everything else, so a configuration file, an article with front matter, and a
+document like this one are all data sources.
 
+Every document holds exactly one data value: a table (keys mapped to values),
+an array, a scalar (a string, number or boolean), or null. That value is built
+from three things: data Tags, the Lists inside them, and the document's
+headings.
+
+
+  VII.A. Data Tags
+
+Only three Tag names carry data: `table`, `array` and `value`. The exporter
+ignores every other Tag. A data Tag may take any Tag form, and any bracket or
+token, like every other Tag.
+
+In a Tag head a `,` starts a plain value and a `;` starts a `key: value` pair.
+A `table` takes only pairs and an `array` takes only plain values. The wrong
+kind is an error rather than being dropped, because the two delimiters are one
+keystroke apart.
+
+The body of a `table` or `array` is made of Lists (see VII.B), and adds to
+whatever the head holds. A `value` holds exactly one scalar: one plain value in
+its head, or one fenced Block as its body for a string that spans lines.
+
+
+###  src Fey Data Tags
+{# array, en, fr #}
+{# table; drafts: false; workers: 4 #}
+{# value, 8080 #}
+
+[ table; version: 2 ]#
+    name_:  Fey Notes
+
+[ array #]
+-  first
+-  second
+[# array ]
+
+[ value ]#
+    ```
+    a string that
+    spans two lines
+    ```
+###
+
+
+  VII.B. Lists as Data
+
+A bullet's anonymous text is its key: `title_:` is the key `title`, and
+`key_1_:` is the key `key_1`. A bullet without anonymous text, such as `-` or
+`1.`, has no key. Enumerations never matter to the data, so an array may be
+numbered for the reader.
+
+Keys in bullets are therefore made of letters, digits and `_`, and the
+anonymous text must end in `_`: `key_1:` is the key `key` with the enumeration
+`1`. Keys with other characters, like `content-type`, are written as headings
+(see VII.C).
+
+A list item holds exactly one value, which is one of:
+
+  -  its inline text, a scalar (see VII.D)
+  -  an inline data scope Tag
+  -  a sublist on the following lines
+  -  a data block Tag or pair Tag
+  -  a fenced Block, which is a string that keeps its lines
+  -  nothing at all, which is null
+
+A sublist is a table when all of its bullets have keys, and an array when none
+of them do. Mixing the two is an error. A bullet with nothing after it on its
+line, such as `-` or `author_:`, takes its value from its sublist, or is null
+when it has none.
+
+
+###  src Fey Lists as Data
+[ table ]#
+    title_:      Fey Notes
+    languages_:  {# array, en, fr #}
+    author_:
+        name_:   Aldo Zeroun
+        email_:  git@example.org
+    sizes_:
+        -  {# array, 640, 360 #}
+        -  {# array, 1280, 720 #}
+    menu_:
+        -
+            name_:    Home
+            weight_:  1
+        -
+            name_:    Notes
+            weight_:  2
+###
+
+
+  VII.C. Headings as Data
+
+Headings divide data into sections, as tables do in TOML. The document is a
+section too: the text before its first heading is its body, and its level 1
+headings are its subsections.
+
+  -  A heading's title is its key. A title may hold any text, which is how keys
+     like `content-type` or `my key` are written.
+
+  -  A heading titled `_` is an array element instead of a key.
+
+  -  The headings at one level must all be keys, which makes their section a
+     table, or all be `_`, which makes it an array. Mixing them is an error,
+     and so is a heading without a title.
+
+  -  In a section with key headings, `table` Tags in the body are merged into
+     it beside the subsections. A key defined twice is an error.
+
+  -  A section with `_` headings may not hold data in its body.
+
+  -  A section without subsections holds the one data value in its body,
+     whatever its type. Several `table` Tags there are merged. A section with
+     no data at all is null.
+
+Only data Tags at the top level of a section's body count. Prose, other Tags,
+and Tags inside paragraphs are not data.
+
+So a whole document is a table when its level 1 headings are keys, an array
+when they are `_`, and otherwise whatever its body holds.
+
+
+###  src Fey Headings as Data
+  * site
+{# table; title: Fey Notes; baseURL: https://example.org/ #}
+
+  ** content-type
+{# value, "text/html\; charset=utf-8" #}
+
+  ** servers
+
+  *** _
+{# table; host: alpha; port: 8080 #}
+
+  *** _
+{# table; host: beta; port: 8081 #}
+###
+
+
+The example above holds the same data as this JSON:
+
+###  src json
+{
+  "site": {
+    "title": "Fey Notes",
+    "baseURL": "https://example.org/",
+    "content-type": "text/html; charset=utf-8",
+    "servers": [
+      { "host": "alpha", "port": 8080 },
+      { "host": "beta", "port": 8081 }
+    ]
+  }
+}
+###
+
+
+  VII.D. Scalars
+
+  -  `true` and `false` are booleans.
+
+  -  Integers and decimals written as JSON writes them, like `42`, `-1.5` or
+     `6.02e23`, are numbers. Leading zeros, underscores and other bases are
+     not, so `012` and `0xff` are strings.
+
+  -  A value in matching double or single quotes is always a string, without
+     its quotes. This is how to keep `"8080"` or `"true"` a string.
+
+  -  Everything else is a string.
+
+The inline text of a list item becomes one line: wrapped lines are joined by a
+single space, and separate paragraphs by a blank line. In a Tag head, `\`
+escapes the character after it, so `a\, b` is the value "a, b".
+
+A fenced Block keeps its text exactly, measured from the indentation of its
+fence. That makes it the way to write a string that spans lines, or one that
+starts, ends or repeats spaces.
+
+There is no word for null. A value is null when it is left out: an empty
+bullet, or a section without data.
+
+
+  VII.E. Converting to JSON, TOML and YAML
+
+The `feyconv` tool converts data between Fey, JSON, TOML and YAML, in every
+direction. A few things do not carry across:
+
+  -  TOML has no null, and needs a table at the top level.
+
+  -  TOML dates and times become strings.
+
+  -  Infinity and NaN cannot be written in Fey or JSON.
+
+  -  YAML tags, collections used as keys, and files holding several YAML
+     documents are not supported.
+
+  -  A key that is empty, holds a line break, or starts, ends or repeats
+     spaces cannot be written in Fey. The key `_` can only be written as a
+     bullet (`__:`), since a heading titled `_` is an array element.
+
+When it writes Fey, the converter reads its own output back and checks that
+the data is unchanged, so a conversion never alters a value silently.
 
 
   VIII. Actions
 
-|            |   |   |
-+============+===+===+
-| [[this]]   |   |   |
-| {{this}}   |   |   |
-| ((this))   |   |   |
-| <<this>>   |   |   |
-+============+===+===+
-| [[[this]]] |   |   |
-| {{{this}}} |   |   |
-| (((this))) |   |   |
-| <<<this>>> |   |   |
-+============+===+===+
-
-
-$$$  src Fey misc ideas
--  heading linking
-   cannot be anonymous (for now at least it is undefined) the name should be the
-   filename of the document the heading is in
-   -  `[]#` - for internal links
-   -  `#[]` - for external links (experimental. will only look in lateral directories or their subdirectories)
-
--  Tag linking
-   cannot be anonymous (for now at least it is undefined)
-   the name/subject of the link Tag must match exactly the name/subject of the Tag it is linking to.
-   -  `[]@` - for internal links
-   -  `@[]` - for external links (experimental. will only look in lateral directories or their subdirectories)
-$$$
-
-
+|              |   |   |
++==============+===+===+
+| [[ this ]]   |   |   |
+| {{ this }}   |   |   |
+| (( this ))   |   |   |
+| << this >>   |   |   |
++==============+===+===+
+| [[[ this ]]] |   |   |
+| {{{ this }}} |   |   |
+| ((( this ))) |   |   |
+| <<< this >>> |   |   |
++==============+===+===+
 
 
 [# nvim;
-   colorscheme: rose-pine;
    colorscheme: gruvbox;
+   colorscheme: rose-pine;
    colorscheme: chocolatier;
 #]
