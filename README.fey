@@ -270,7 +270,7 @@ Other than Lists, Fences, and Tags, no other Fey syntactic objects may be indent
                 you can se how this would be useful for enumerating headings
                 related to a specific topic
 
-  this_?is_?still_?anonymous_? An All Anonymous Text Signature 
+  this_?is_?still_?anonymous_? An All Anonymous Text Signature
 
   !!!! Note
   !!!! (notice this is a level 4 heading like the rest)
@@ -287,7 +287,7 @@ Other than Lists, Fences, and Tags, no other Fey syntactic objects may be indent
   IV.B. Lists
 
 Fey's ordered and unordered lists are as equally as expressive as headings,
-using the same `<token><delimiter>` segment to partially define itself. 
+using the same `<token><delimiter>` segment to partially define itself.
 !See [# section, IV.A.i. #] for more information on segments.!
 
 The second condition that defines a list is that the segment must be followed by
@@ -514,7 +514,7 @@ long they can be, except normal computing limits in the parser.
   IV.D. Tables
 
 Tables in Fey can be both incredibly simple or complex (in a good way) to best
-suit the needs of the user. 
+suit the needs of the user.
 
 While they can be created manually by typing out each character or doing other
 text manipulation, it is recommended that for a Table to contain some of its
@@ -907,7 +907,6 @@ not body because of shallow indentation
 ###
 
 
-
   IV.E.ii.e. Paired Open/Close Tags
 
 Paired Tags perform much like structural html or xml tags. They have an Open
@@ -923,10 +922,10 @@ This Tag form allows Fey to be easily translated into html, without needing to
 support html embedding, as what would be html can be written directly using
 paired Tags (and other tag forms), like so...
 
-Can contain Paired, Block, Line, and Scope Tags. 
+Can contain Paired, Block, Line, and Scope Tags.
 
 ###  src Fey Paired Tag Example
-  * 
+  *
 [ html; lang: "en" /]
 [ head /]
   [ title /]Home[/ title ]
@@ -964,55 +963,12 @@ Can contain Paired, Block, Line, and Scope Tags.
 ###
 
 
-  . Features Still In the Design Process
+  V. Emphasis
 
-  V. Superscripts and Subscripts
+Fey emphasis markers allow the sytling of text objects, so that they carry a
+stronger visual distinction from surrounding text. These styles can also be
+applied on export (on by default) through an exporter config setting.
 
-To indicate superscripts, we can use `^` (caret) between the single `carrier`
-word or number and the superscript text or `load`. If the carrier or load
-contains an `_` (underscore) or the load contains multiple space delimited
-words, numbers, or symbols, either side can be surrounded by a Plain Tag (see
-Plain Tags) to remove ambiguity.
-
-Similarly, subscripts use a `_` (underscore) between the single carrier and the
-load. Plain Tags can again be used to remove ambiguity if there are underscores
-in the carrier or load, or the load contains multiple space delimited words,
-numbers, or symbols.
-
-###
-carrier^load 9.5^4 {10_000_000}^(the moon)
-carrier_load 9.5_4 {10_000_000}_(the moon)
-###
-
-Six settings are available to set whether Plain Tags are required when using a
-live renderer, on export to a staic format, or used by an editor to show pretty
-wysiwyg text such https://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1as in neovim. When they are true, Plain Tags are optional;
-when they are false, Plain Tags are required. By default they are all true.
-
-    -  fey-render-subscripts
-    -  fey-export-subscripts
-    -  fey-pretty-subscripts
-    -  fey-render-superscripts
-    -  fey-export-superscripts
-    -  fey-pretty-superscripts
-
-Lastly, the plugin for your editor of choice should provide commands that can
-toggle on/off showing wysiwyg super-/sub-scripts individually or together.
-
-In the fey.nvim plugin for example we have:
-
-    -  FeyTogglePrettySuperscript
-    -  FeyTogglePrettySubscript
-    -  FeyPrettySubSuperscriptOn
-    -  FeyPrettySubSuperscriptOff
-
-
-###  src mermaid: export
-  
-###
-
-
-  VI. Emphasis
 
 | emphasis      | clr, hl    | style     |
 +===============+============+===========+
@@ -1066,6 +1022,54 @@ In the fey.nvim plugin for example we have:
 | ''this text'' | fg2, bg1   | quote     |
 | ""this text"" | fg2, bg1   | quote     |
 +===============+============+===========+
+
+
+  . Features Still In the Design Process
+
+  VI. Superscripts and Subscripts
+
+To indicate superscripts, we can use `^` (caret) between the single `carrier`
+word or number and the superscript text or `load`. If the carrier or load
+contains an `_` (underscore) or the load contains multiple space delimited
+words, numbers, or symbols, either side can be surrounded by a Plain Tag (see
+Plain Tags) to remove ambiguity.
+
+Similarly, subscripts use a `_` (underscore) between the single carrier and the
+load. Plain Tags can again be used to remove ambiguity if there are underscores
+in the carrier or load, or the load contains multiple space delimited words,
+numbers, or symbols.
+
+###
+carrier^load 9.5^4 {10_000_000}^(the moon)
+carrier_load 9.5_4 {10_000_000}_(the moon)
+###
+
+Six settings are available to set whether Plain Tags are required when using a
+live renderer, on export to a staic format, or used by an editor to show pretty
+wysiwyg text such https://www.razer.com/ca-en/gaming-mice/razer-naga-v3-pro/RZ01-05660100-R3U1as in neovim. When they are true, Plain Tags are optional;
+when they are false, Plain Tags are required. By default they are all true.
+
+    -  fey-render-subscripts
+    -  fey-export-subscripts
+    -  fey-pretty-subscripts
+    -  fey-render-superscripts
+    -  fey-export-superscripts
+    -  fey-pretty-superscripts
+
+Lastly, the plugin for your editor of choice should provide commands that can
+toggle on/off showing wysiwyg super-/sub-scripts individually or together.
+
+In the fey.nvim plugin for example we have:
+
+    -  FeyTogglePrettySuperscript
+    -  FeyTogglePrettySubscript
+    -  FeyPrettySubSuperscriptOn
+    -  FeyPrettySubSuperscriptOff
+
+
+###  src mermaid: export
+
+###
 
 
   VII. Data Serialization
@@ -1163,6 +1167,18 @@ when it has none.
             name_:    Notes
             weight_:  2
 ###
+
+**`key` tags**: a key that is not a word (`og:image`, `my-key`) is an unkeyed bullet of a table whose whole item is a
+`key` tag; it counts as keyed. First head value = key, second = scalar value; or the value is the body (line tag:
+text; block/pair tag: any item value, sublists too). No value = null. Realm's reader; feyconv does not have it yet.
+
+    [ table ]#
+        title_:  Home
+        -  {# key, og:image, /o.png #}
+        -  #[ key, my-key ] some text #
+        -  [ key, content-type ]#
+            main_:  text/html
+        -  [ key, another-key #] some value text [# key ]
 
 
   VII.C. Headings as Data
